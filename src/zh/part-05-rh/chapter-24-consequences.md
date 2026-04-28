@@ -2,14 +2,75 @@
 difficulty = "★★★"
 prerequisites = ["V-21"]
 paths = ["red"]
-keywords = ["TBD", "TBD"]
+keywords = ["consequences", "prime gaps", "Skewes number", "error term", "arithmetic"]
 zh-status = "complete"
 en-status = "missing"
 en-missing-note = "English translation pending"
 ---
 
-# 黎曼猜想的推论
+# 第二十四章：黎曼猜想的推论
 
-> Difficulty: ★★★ | Paths: 🔴 | Prerequisites: V-21
+> 难度：★★★ | 路径：🔴 | 前置：第二十一章
 
-*Content to be developed.*
+## 如果黎曼猜想成立
+
+黎曼猜想一旦被证明——或者被否定——许多数学结果将随之改变。本章梳理 RH 成立时的主要推论。即使黎曼猜想尚未被证明，这些推论已被大量数值证据和部分解析结果所支持，其中许多已被数学家在日常工作中"默认"使用。
+
+## 素数分布
+
+RH 成立的最重要推论是关于素数分布的最优估计。RH 等价于：
+
+$$
+\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)
+$$
+
+这意味着素数的分布极其均匀——任何局部的"成团"或"稀疏"均受到平方根法则的控制。作为推论：
+
+- 第 $n$ 个素数 $p_n$ 满足 $p_n = n\ln n + n\ln\ln n - n + O(\sqrt{n}\ln n)$
+- 素数间隔 $p_{n+1} - p_n$ 平均为 $\ln n$，最大间隔为 $O(\sqrt{p_n}\ln p_n)$（Cramér 猜想等更强的猜想预测间隔为 $O((\ln p_n)^2)$）
+
+## Skewes 数
+
+1955 年，南非数学家 Stanley Skewes 证明了：如果黎曼猜想成立，则存在一个数 $S$，满足 $\pi(S) > \operatorname{Li}(S)$——即素数计数函数首次超过对数积分的时间点。在 RH 成立的前提下，$S < e^{e^{e^{79}}} \approx 10^{10^{10^{34}}}$（所谓的"Skewes 数"）。
+
+这个数的巨大规模意味深长：尽管 $\operatorname{Li}(x)$ 在绝大多数 $x$ 处高估 $\pi(x)$，但模型预测它们会无穷多次交叉——但是发生了极其缓慢，以至于人类永远无法亲眼观测到。
+
+## Möbius 函数与平方和
+
+RH 蕴含 Möbius 函数的求和具有极小的波动：
+
+$$
+\sum_{n \leq x} \mu(n) = O(x^{1/2+\varepsilon})
+$$
+
+这一结果直接关系到素数的事实分解和数论中许多涉及 $\mu(n)$ 的估计。例如，RH 给出：$\frac{6}{\pi^2}$ 是整数表中无平方因子整数的自然密度的精确误差估计。
+
+## 算术级数中的素数
+
+广义黎曼猜想（Generalized Riemann Hypothesis，GRH，第三十章）一旦成立，将给出**每一个**算术级数 $a \bmod q$（其中 $\gcd(a, q) = 1$）中素数个数的精确均匀分布。特别是，GRH 将直接证明 Dirichlet 定理的一个强化版本：
+
+$$
+\pi(x; q, a) = \frac{\operatorname{Li}(x)}{\varphi(q)} + O(\sqrt{x} \ln(qx))
+$$
+
+其中 $\pi(x; q, a)$ 是满足 $p \equiv a \pmod{q}$ 且 $p \leq x$ 的素数个数。这一公式表明素数在各个合法剩余类之间是**完全均匀**分布的（在平方根误差项内）。
+
+## 数论中的其他推论
+
+RH 的推论远不止素数分布。以下结果——目前均需以"假设 RH 成立"为前提——如果 RH 被证明，将自动成为定理：
+
+- Miller 素性测试（广泛用于密码学）在 RH 成立的情况下为确定性多项式时间算法
+- $\zeta$ 函数在临界线上的精细振荡估计
+- 关于陈数（Chen prime）和孪生素数的下界估计将大幅改进
+
+## 如何等待黎曼猜想的证明
+
+数学界对 RH 的态度充满务实精神。数论论文中常见措辞"假设黎曼猜想成立……"——这意味着该结果是条件性的，但其条件（RH）如此普遍地被相信为真，以至于该结果被视为"大概率正确的定理"。
+
+一万三千亿个零点全部位于临界线上——数学家的直觉与数值证据一致地指向"RH 为真"。但直觉和数值证据均不能替代证明。
+
+---
+
+> **本章要点**：如果 RH 成立，素数分布的误差项达到最优 $O(\sqrt{x}\ln x)$。Möbius 求和为 $O(x^{1/2+\varepsilon})$。Skewes 数给出了 $\pi(x) > \operatorname{Li}(x)$ 第一次发生的 RH 上界。Miller 素性测试成为确定性算法。整个数论的无数结果从"条件性的"转变为"无条件的"定理。
+
+> **参见**：[第二十五章：尝试的证明与进路](./chapter-25-attempts.md) ★★★
