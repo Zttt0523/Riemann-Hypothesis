@@ -2,6 +2,14 @@
 
 A systematic, bilingual (Chinese + English) encyclopedia-level introduction to the Riemann Hypothesis, spanning from elementary mathematics to advanced research topics. Built with [mdBook](https://github.com/rust-lang/mdBook).
 
+---
+
+> *I was born on May 23, 2000. The Seven Millennium Prize Problems were announced on May 24, 2000 — the day after I entered the world. I have always felt that this cannot be mere coincidence; that a span of a single day must carry the weight of some sacred compact. The Riemann Hypothesis was waiting for me, and this encyclopedia is my answer.*
+>
+> — Zhu Tong (朱同)
+
+---
+
 ## Reading Paths
 
 | Path | For | Chapters | Description |
