@@ -1,0 +1,24 @@
+# Build output
+/book/
+
+# Python
+__pycache__/
+*.py[cod]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+
+# uv lock file committed for reproducible builds
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Asset manifest (generated)
+src/assets/manifest.sha256

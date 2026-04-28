@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riemann Hypothesis Encyclopedia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 100vh;
+      background: #f8f8f6; color: #333;
+    }
+    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; text-align: center; }
+    p.subtitle { color: #666; margin-bottom: 2.5rem; font-size: 1.05rem; text-align: center; max-width: 500px; }
+    .lang-links { display: flex; gap: 2rem; }
+    .lang-links a {
+      display: inline-block; padding: 1rem 2.5rem;
+      border: 2px solid #c41230; border-radius: 6px;
+      text-decoration: none; color: #c41230;
+      font-size: 1.2rem; font-weight: 600;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-links a:hover { background: #c41230; color: #fff; }
+  </style>
+</head>
+<body>
+  <h1>Riemann Hypothesis Encyclopedia</h1>
+  <p class="subtitle">A systematic, bilingual encyclopedia from elementary foundations to the frontiers of research</p>
+  <div class="lang-links">
+    <a href="/zh/">中文版</a>
+    <a href="/en/">English Version</a>
+  </div>
+  <script>
+    (function() {
+      var lang = (navigator.language || '').toLowerCase();
+      if (lang.indexOf('zh') === 0) { window.location.replace('/zh/'); }
+      else if (lang.indexOf('en') === 0) { /* stay */ }
+    })();
+  </script>
+</body>
+</html>

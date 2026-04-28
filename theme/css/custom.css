@@ -1,0 +1,42 @@
+:root {
+  --zh-font-stack: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif;
+  --mono-font-stack: "JetBrains Mono", "Source Code Pro", "Fira Code", "Courier New", monospace;
+}
+
+/* Chinese font stack for zh/ pages */
+html[lang="zh"] body,
+body:has(h1:lang("zh")) {
+  font-family: var(--zh-font-stack);
+}
+
+/* Math display tweaks */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5em 0;
+}
+
+.katex-display > .katex {
+  max-width: 100%;
+}
+
+/* Inline math alignment */
+.katex {
+  font-size: 1.05em;
+}
+
+/* Difficulty badge colors */
+.difficulty-foundation { color: #2e7d32; }   /* ★ green */
+.difficulty-intermediate { color: #e65100; }  /* ★★ orange */
+.difficulty-advanced { color: #c62828; }      /* ★★★ red */
+
+/* Path tags */
+.path-green { color: #2e7d32; }
+.path-blue { color: #1565c0; }
+.path-red { color: #c62828; }
+
+/* Blockquote styling for "See also" references */
+blockquote.see-also {
+  border-left-color: #ffa726;
+  background: #fff8e1;
+}

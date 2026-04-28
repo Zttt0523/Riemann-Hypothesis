@@ -1,0 +1,9 @@
+[project]
+name = "riemann-hypothesis"
+version = "0.1.0"
+description = "Riemann Hypothesis Encyclopedia — a bilingual systematic introduction from elementary foundations to advanced research"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+]

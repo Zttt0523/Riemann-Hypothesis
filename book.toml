@@ -1,0 +1,19 @@
+[book]
+authors = [""]
+language = "en"
+title = "Riemann Hypothesis Encyclopedia"
+src = "src"
+site-url = "/"
+
+[preprocessor.katex]
+after = ["links"]
+
+[preprocessor.katex.katex]
+macros = "src/macros.tex"
+no-css = false
+
+[output.html]
+mathjax-support = false
+site-url = "/"
+git-repository-url = "https://github.com/<org>/riemann-hypothesis"
+edit-url-template = "https://github.com/<org>/riemann-hypothesis/edit/main/src/{path}"

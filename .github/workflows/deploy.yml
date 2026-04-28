@@ -1,0 +1,62 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: uv sync
+
+      - name: Install mdBook and mdbook-katex (pre-built binaries)
+        run: |
+          curl -L https://github.com/cargo-bins/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-musl.tgz | tar xz
+          ./cargo-binstall --no-confirm mdbook@0.4.52 mdbook-katex@0.9.4
+
+      - name: Check frontmatter consistency
+        run: make check-frontmatter
+
+      - name: Check links
+        run: make check-links
+
+      - name: Check asset freshness
+        run: make check-assets
+
+      - name: Build
+        run: make build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: book
+          path: book/
+
+  deploy:
+    needs: build-and-deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: book
+          path: book/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
