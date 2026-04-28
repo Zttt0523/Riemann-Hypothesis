@@ -7,6 +7,12 @@ keywords = ["preface", "reading-guide", "overview"]
 
 > 难度：★
 
+![黎曼猜想全景：素数、零点和临界线](../assets/images/plots/riemann-beauty.png)
+
+*The Riemann Hypothesis — Primes, Zeros, and the Critical Line. 五面板综合可视化：A. 黎曼显式公式对素数计数函数 π(x) 的逐步逼近；B. Hardy Z(t) 函数与临界线上的零点；C. 素数螺旋；D. Montgomery 对关联与 GUE 随机矩阵预测；E. ζ(s) 的零点全景。*
+
+---
+
 ## 关于本百科全书
 
 欢迎阅读《黎曼猜想百科全书》。这部著作旨在系统地介绍黎曼猜想——数学中最著名、最重要的未解问题之一——从最基础的概念到最前沿的研究。

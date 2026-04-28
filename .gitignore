@@ -20,5 +20,4 @@ wheels/
 .DS_Store
 Thumbs.db
 
-# Asset manifest (generated)
-src/assets/manifest.sha256
+# Asset manifest is committed for CI staleness checks

@@ -7,6 +7,12 @@ keywords = ["preface", "reading-guide", "overview"]
 
 > Difficulty: ★
 
+![The Riemann Hypothesis — Primes, Zeros, and the Critical Line](../assets/images/plots/riemann-beauty.png)
+
+*The Riemann Hypothesis — Primes, Zeros, and the Critical Line. Five-panel composite visualization: A. Riemann's explicit formula progressively approximating π(x); B. The Hardy Z(t) function revealing zeros as sign changes on the critical line; C. Prime spiral (Sacks variant); D. Montgomery pair correlation matching GUE random matrix prediction; E. Zeros of ζ(s) — trivial and non-trivial.*
+
+---
+
 ## About This Encyclopedia
 
 Welcome to the Riemann Hypothesis Encyclopedia — a systematic introduction to one of mathematics' most celebrated and consequential open problems, from elementary foundations to the frontiers of research.
