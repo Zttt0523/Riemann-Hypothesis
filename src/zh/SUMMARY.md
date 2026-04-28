@@ -50,6 +50,7 @@
 
 - [附录 A：从一维到二维——素数在复数域绽放](appendix/gaussian-primes.md)
 - [附录 B：黎曼猜想为何难以证明——难点、进路与第一性原理](appendix/why-rh-is-hard.md)
+- [附录 C：攻克黎曼猜想——完整阅读地图与渐进学习计划](appendix/reading-roadmap.md)
 
 [参考书目](bibliography.md)
 
