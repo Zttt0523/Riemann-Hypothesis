@@ -31,10 +31,10 @@ $$
 A more refined version uses the **logarithmic integral**:
 
 $$
-\operatorname{Li}(x) = \int_2^x \frac{dt}{\ln t}
+\mathrm{Li}(x) = \int_2^x \frac{dt}{\ln t}
 $$
 
-$\operatorname{Li}(x)$ is a better approximation than $x/\ln x$, and PNT is equivalently expressed as $\pi(x) \sim \operatorname{Li}(x)$.
+$\mathrm{Li}(x)$ is a better approximation than $x/\ln x$, and PNT is equivalently expressed as $\pi(x) \sim \mathrm{Li}(x)$.
 
 ## From Gauss to Chebyshev
 
@@ -52,7 +52,7 @@ PNT is equivalent to the statement that $\psi(x) \sim x$.
 
 The 1896 proofs of PNT rest on two facts about $\zeta(s)$.
 
-**Lemma 1**: $\zeta(s)$ has no zeros on the line $\operatorname{Re}(s) = 1$.
+**Lemma 1**: $\zeta(s)$ has no zeros on the line $\Re(s) = 1$.
 
 That is, $\zeta(1 + it) \neq 0$ for all real $t$. This is the crucial technical heart of the PNT.
 
@@ -87,11 +87,11 @@ $$
 
 ## What Prevents a Stronger Conclusion?
 
-Hadamard and de la Vallée Poussin used only the fact that $\zeta(1+it) \neq 0$, not the full Riemann Hypothesis (which asserts that only zeros with $\operatorname{Re}(s) = 1/2$ matter).
+Hadamard and de la Vallée Poussin used only the fact that $\zeta(1+it) \neq 0$, not the full Riemann Hypothesis (which asserts that only zeros with $\Re(s) = 1/2$ matter).
 
-Because $\zeta(1+it) \neq 0$ is a weaker statement, the error bound is weaker: $\pi(x) = \operatorname{Li}(x) + O(x e^{-c\sqrt{\ln x}})$.
+Because $\zeta(1+it) \neq 0$ is a weaker statement, the error bound is weaker: $\pi(x) = \mathrm{Li}(x) + O(x e^{-c\sqrt{\ln x}})$.
 
-If the Riemann Hypothesis were true, the error term would sharpen dramatically: $\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)$. And conversely — **the Riemann Hypothesis is equivalent to the error term in the Prime Number Theorem being $O(x^{1/2+\varepsilon})$**.
+If the Riemann Hypothesis were true, the error term would sharpen dramatically: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x} \ln x)$. And conversely — **the Riemann Hypothesis is equivalent to the error term in the Prime Number Theorem being $O(x^{1/2+\varepsilon})$**.
 
 ## The Significance of PNT
 
@@ -105,6 +105,6 @@ But PNT also reveals *why* the Riemann Hypothesis matters. PNT answers: "Roughly
 
 ---
 
-> **Key points**: The Prime Number Theorem $\pi(x) \sim x/\ln x$ was proved independently by Hadamard and de la Vallée Poussin in 1896. The key technical step is showing $\zeta(s) \neq 0$ on $\operatorname{Re}(s) = 1$. Perron's formula and the Chebyshev function $\psi(x)$ are the central technical tools. PNT gives a "first-order" approximation; the Riemann Hypothesis is equivalent to the sharpest possible error bound $O(x^{1/2+\varepsilon})$.
+> **Key points**: The Prime Number Theorem $\pi(x) \sim x/\ln x$ was proved independently by Hadamard and de la Vallée Poussin in 1896. The key technical step is showing $\zeta(s) \neq 0$ on $\Re(s) = 1$. Perron's formula and the Chebyshev function $\psi(x)$ are the central technical tools. PNT gives a "first-order" approximation; the Riemann Hypothesis is equivalent to the sharpest possible error bound $O(x^{1/2+\varepsilon})$.
 
 > **Continue to**: [Part IV: The Riemann Zeta Function](../part-04-zeta/chapter-16-zeta-definition.md) ★★

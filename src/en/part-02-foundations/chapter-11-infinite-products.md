@@ -40,7 +40,7 @@ Writing each factor as $a_n = 1 + u_n$, the product $\prod (1 + u_n)$ converges 
 In 1737, Euler discovered one of the most stunning identities in analysis — a formula linking an infinite sum over *all integers* to an infinite product over *all primes*:
 
 $$
-\sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}} \qquad (\operatorname{Re}(s) > 1)
+\sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}} \qquad (\Re(s) > 1)
 $$
 
 The left side is $\zeta(s)$ as a series — the sum of reciprocal $s$-th powers of all positive integers. The right side is an infinite product over primes $p = 2, 3, 5, 7, 11, \ldots$. This identity connects **addition** (sum over integers) with **multiplication** (product over primes) in a profoundly deep way.
@@ -85,7 +85,7 @@ Comparing this product with the Taylor expansion $\sin(\pi z) = \pi z - \frac{(\
 
 ## Connection to the Riemann Hypothesis
 
-The Euler product converges only for $\operatorname{Re}(s) > 1$. But through **analytic continuation** (Chapter 17), $\zeta(s)$ is extended to the entire complex plane. In the critical strip $0 < \operatorname{Re}(s) < 1$, the behavior of $\zeta(s)$ is governed by its zeros — zeros that are linked, through the Euler product, to the distribution of primes.
+The Euler product converges only for $\Re(s) > 1$. But through **analytic continuation** (Chapter 17), $\zeta(s)$ is extended to the entire complex plane. In the critical strip $0 < \Re(s) < 1$, the behavior of $\zeta(s)$ is governed by its zeros — zeros that are linked, through the Euler product, to the distribution of primes.
 
 This is the essence of Riemann's 1859 paper: **study the analytic properties and zero locations of $\zeta(s)$ in the complex plane, to obtain the most precise possible information about prime numbers.**
 

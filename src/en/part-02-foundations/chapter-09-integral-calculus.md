@@ -63,7 +63,7 @@ For example:
 The most important special function in zeta function theory is the **Gamma function**, introduced by Euler in 1729:
 
 $$
-\Gamma(s) = \int_0^{\infty} e^{-t} \, t^{s-1} \, dt \qquad (\operatorname{Re}(s) > 0)
+\Gamma(s) = \int_0^{\infty} e^{-t} \, t^{s-1} \, dt \qquad (\Re(s) > 0)
 $$
 
 The Gamma function extends the factorial from positive integers to complex numbers:
@@ -79,7 +79,7 @@ The Gamma function appears in the functional equation of $\zeta(s)$ (Chapter 18)
 Many special functions have integral representations. $\zeta(s)$ itself does:
 
 $$
-\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1}\,dx \qquad (\operatorname{Re}(s) > 1)
+\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1}\,dx \qquad (\Re(s) > 1)
 $$
 
 This type of integral representation belongs to the theory of the **Mellin transform**, widely used in analytic number theory.

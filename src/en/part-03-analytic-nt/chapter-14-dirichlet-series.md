@@ -28,7 +28,7 @@ When all $a_n = 1$, $F(s) = \sum n^{-s} = \zeta(s)$ — the Riemann zeta functio
 
 Unlike power series, whose domain of convergence is a disk, the natural convergence domain of a Dirichlet series is a **half-plane**.
 
-> **Theorem**: There exists a real number $\sigma_c$ (the **abscissa of convergence**) such that the Dirichlet series converges for $\operatorname{Re}(s) > \sigma_c$ and diverges for $\operatorname{Re}(s) < \sigma_c$.
+> **Theorem**: There exists a real number $\sigma_c$ (the **abscissa of convergence**) such that the Dirichlet series converges for $\Re(s) > \sigma_c$ and diverges for $\Re(s) < \sigma_c$.
 
 For $\zeta(s) = \sum n^{-s}$, $\sigma_c = 1$ (the $p$-series converges for $s > 1$ and diverges for $s \leq 1$).
 
@@ -36,7 +36,7 @@ For a general Dirichlet series, $\sigma_c$ depends on the growth of the coeffici
 
 ### Absolute Convergence Abscissa
 
-There is also an **absolute convergence abscissa** $\sigma_a$, with $\sigma_c \leq \sigma_a \leq \sigma_c + 1$. For $\zeta(s)$, $\sigma_c = \sigma_a = 1$, but the two can differ — for example, $\sum (-1)^{n-1} n^{-s}$ converges (conditionally) for $\operatorname{Re}(s) > 0$ but converges absolutely only for $\operatorname{Re}(s) > 1$.
+There is also an **absolute convergence abscissa** $\sigma_a$, with $\sigma_c \leq \sigma_a \leq \sigma_c + 1$. For $\zeta(s)$, $\sigma_c = \sigma_a = 1$, but the two can differ — for example, $\sum (-1)^{n-1} n^{-s}$ converges (conditionally) for $\Re(s) > 0$ but converges absolutely only for $\Re(s) > 1$.
 
 ## Multiplication and Euler Products
 
@@ -57,7 +57,7 @@ where $f * g$ is Dirichlet convolution. This property is the algebraic source of
 For example, the Dirichlet series of $\mu$ is:
 
 $$
-\sum_{n=1}^{\infty} \frac{\mu(n)}{n^s} = \frac{1}{\zeta(s)} \qquad (\operatorname{Re}(s) > 1)
+\sum_{n=1}^{\infty} \frac{\mu(n)}{n^s} = \frac{1}{\zeta(s)} \qquad (\Re(s) > 1)
 $$
 
 This relation follows directly from the Euler product and shows how the Möbius function and $\zeta(s)$ are linked through Dirichlet series.
@@ -70,7 +70,7 @@ $$
 \sum_{n \leq x} a_n = \frac{1}{2\pi i} \int_{c - i\infty}^{c + i\infty} F(s) \frac{x^s}{s} \, ds
 $$
 
-where the integral is taken along the vertical line $\operatorname{Re}(s) = c$ (with $c > \sigma_a$).
+where the integral is taken along the vertical line $\Re(s) = c$ (with $c > \sigma_a$).
 
 The basic strategy for applying Perron's formula:
 1. Start from a Dirichlet series (e.g., $\zeta(s)$ or a related function)
@@ -92,7 +92,7 @@ The Prime Number Theorem is then equivalent to $\psi(x) = \sum_{n \leq x} \Lambd
 **The structural framework of the Riemann Hypothesis is now visible**:
 
 $$
-\text{Primes} \xleftrightarrow[]{\text{Perron}} \text{$\zeta'/\zeta$} \xleftrightarrow[]{\text{poles = zeros}} \text{Zeros of $\zeta(s)$} \xleftrightarrow[]{\text{RH}} \text{$\operatorname{Re}(\rho) = 1/2$}
+\text{Primes} \xleftrightarrow[]{\text{Perron}} \text{$\zeta'/\zeta$} \xleftrightarrow[]{\text{poles = zeros}} \text{Zeros of $\zeta(s)$} \xleftrightarrow[]{\text{RH}} \text{$\Re(\rho) = 1/2$}
 $$
 
 ---

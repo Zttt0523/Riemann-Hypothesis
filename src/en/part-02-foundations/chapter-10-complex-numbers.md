@@ -22,7 +22,7 @@ $$
 z = x + iy
 $$
 
-where $x = \operatorname{Re}(z)$ (the real part) and $y = \operatorname{Im}(z)$ (the imaginary part).
+where $x = \Re(z)$ (the real part) and $y = \Im(z)$ (the imaginary part).
 
 ### Operations
 

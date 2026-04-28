@@ -32,7 +32,7 @@ The RH's appearances in popular culture — from novels like *Prime Obsession*, 
 
 Why do mathematicians overwhelmingly believe the Riemann Hypothesis is true? Part of the answer is empirical — thirteen trillion zeros, all on the critical line. But the deeper answer involves **aesthetics**.
 
-The "beauty" of RH lies not only in its geometric simplicity ($\operatorname{Re}(s) = \frac{1}{2}$) but in how it weaves together seemingly unrelated domains. Prime numbers, complex analysis, random matrices, quantum chaos — all orbit around the same critical line. This convergence is the highest form of mathematical beauty.
+The "beauty" of RH lies not only in its geometric simplicity ($\Re(s) = \frac{1}{2}$) but in how it weaves together seemingly unrelated domains. Prime numbers, complex analysis, random matrices, quantum chaos — all orbit around the same critical line. This convergence is the highest form of mathematical beauty.
 
 Hilbert once said: "A mathematical theory is perfect only when it is simple enough that you can explain it to the first person you meet on the street." The statement of RH possesses exactly this simplicity. Anyone can understand what "real part equals $1/2$" means — but to understand *why* it should be true requires traversing the entire mathematical landscape laid out across all thirty-two chapters of this book.
 
@@ -62,6 +62,6 @@ The writing of this encyclopedia is only the beginning of a journey. The pages y
 
 ---
 
-> **Encyclopedia summary**: From Riemann's ancestry to the construction of $\zeta(s)$, from the random walk of primes to quantum chaos, from the symmetry of $\operatorname{Re}(s) = 1/2$ to the suspense of humanity waiting for an answer — the story of the Riemann Hypothesis is one of the greatest narratives about human reason, imagination, and perseverance. Whenever the answer arrives, the journey itself has been magnificent enough.
+> **Encyclopedia summary**: From Riemann's ancestry to the construction of $\zeta(s)$, from the random walk of primes to quantum chaos, from the symmetry of $\Re(s) = 1/2$ to the suspense of humanity waiting for an answer — the story of the Riemann Hypothesis is one of the greatest narratives about human reason, imagination, and perseverance. Whenever the answer arrives, the journey itself has been magnificent enough.
 
 > **End of the Encyclopedia**

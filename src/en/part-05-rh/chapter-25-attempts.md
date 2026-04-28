@@ -34,7 +34,7 @@ Connes' work transforms RH into a technical problem in noncommutative geometry �
 
 Following the Montgomery–Dyson connection (Chapters 22, 29), some mathematicians approach RH through random matrix theory.
 
-The reasoning: if $\zeta$ zeros are statistically distributed like eigenvalues of GUE matrices, and GUE eigenvalues are real (corresponding to $\operatorname{Re} = 1/2$), then the statistical inevitability of zeros lying on the critical line follows from random matrix universality. But this is a "physical inevitability" argument, not a mathematical proof — it explains why the critical line is the most *natural* location for zeros, without rigidly establishing that no zero can deviate.
+The reasoning: if $\zeta$ zeros are statistically distributed like eigenvalues of GUE matrices, and GUE eigenvalues are real (corresponding to $\Re = 1/2$), then the statistical inevitability of zeros lying on the critical line follows from random matrix universality. But this is a "physical inevitability" argument, not a mathematical proof — it explains why the critical line is the most *natural* location for zeros, without rigidly establishing that no zero can deviate.
 
 ## 2024: The Guth–Maynard Breakthrough
 

@@ -63,7 +63,7 @@ $$
 在 $\zeta$ 函数的研究中，最重要的特殊函数之一是 $\Gamma$ 函数（Gamma function），由欧拉于 1729 年引入：
 
 $$
-\Gamma(s) = \int_0^{\infty} e^{-t} \, t^{s-1} \, dt \qquad (\operatorname{Re}(s) > 0)
+\Gamma(s) = \int_0^{\infty} e^{-t} \, t^{s-1} \, dt \qquad (\Re(s) > 0)
 $$
 
 $\Gamma$ 函数将阶乘从整数推广到复数。基本性质：
@@ -79,7 +79,7 @@ $\Gamma$ 函数出现在 $\zeta(s)$ 的函数方程中（第十八章），将 $
 许多特殊函数可以通过积分表示定义。$\zeta(s)$ 也有积分表示——例如：
 
 $$
-\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1}\,dx \qquad (\operatorname{Re}(s) > 1)
+\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1}\,dx \qquad (\Re(s) > 1)
 $$
 
 这种类型的积分表示属于 **Mellin 变换**的范畴，在解析数论中广泛应用。

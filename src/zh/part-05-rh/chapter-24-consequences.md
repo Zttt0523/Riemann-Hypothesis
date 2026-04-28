@@ -21,7 +21,7 @@ en-missing-note = "English translation pending"
 RH 成立的最重要推论是关于素数分布的最优估计。RH 等价于：
 
 $$
-\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)
+\pi(x) = \mathrm{Li}(x) + O(\sqrt{x} \ln x)
 $$
 
 这意味着素数的分布极其均匀——任何局部的"成团"或"稀疏"均受到平方根法则的控制。作为推论：
@@ -31,9 +31,9 @@ $$
 
 ## Skewes 数
 
-1955 年，南非数学家 Stanley Skewes 证明了：如果黎曼猜想成立，则存在一个数 $S$，满足 $\pi(S) > \operatorname{Li}(S)$——即素数计数函数首次超过对数积分的时间点。在 RH 成立的前提下，$S < e^{e^{e^{79}}} \approx 10^{10^{10^{34}}}$（所谓的"Skewes 数"）。
+1955 年，南非数学家 Stanley Skewes 证明了：如果黎曼猜想成立，则存在一个数 $S$，满足 $\pi(S) > \mathrm{Li}(S)$——即素数计数函数首次超过对数积分的时间点。在 RH 成立的前提下，$S < e^{e^{e^{79}}} \approx 10^{10^{10^{34}}}$（所谓的"Skewes 数"）。
 
-这个数的巨大规模意味深长：尽管 $\operatorname{Li}(x)$ 在绝大多数 $x$ 处高估 $\pi(x)$，但模型预测它们会无穷多次交叉——但是发生了极其缓慢，以至于人类永远无法亲眼观测到。
+这个数的巨大规模意味深长：尽管 $\mathrm{Li}(x)$ 在绝大多数 $x$ 处高估 $\pi(x)$，但模型预测它们会无穷多次交叉——但是发生了极其缓慢，以至于人类永远无法亲眼观测到。
 
 ## Möbius 函数与平方和
 
@@ -50,7 +50,7 @@ $$
 广义黎曼猜想（Generalized Riemann Hypothesis，GRH，第三十章）一旦成立，将给出**每一个**算术级数 $a \bmod q$（其中 $\gcd(a, q) = 1$）中素数个数的精确均匀分布。特别是，GRH 将直接证明 Dirichlet 定理的一个强化版本：
 
 $$
-\pi(x; q, a) = \frac{\operatorname{Li}(x)}{\varphi(q)} + O(\sqrt{x} \ln(qx))
+\pi(x; q, a) = \frac{\mathrm{Li}(x)}{\varphi(q)} + O(\sqrt{x} \ln(qx))
 $$
 
 其中 $\pi(x; q, a)$ 是满足 $p \equiv a \pmod{q}$ 且 $p \leq x$ 的素数个数。这一公式表明素数在各个合法剩余类之间是**完全均匀**分布的（在平方根误差项内）。
@@ -71,6 +71,6 @@ RH 的推论远不止素数分布。以下结果——目前均需以"假设 RH 
 
 ---
 
-> **本章要点**：如果 RH 成立，素数分布的误差项达到最优 $O(\sqrt{x}\ln x)$。Möbius 求和为 $O(x^{1/2+\varepsilon})$。Skewes 数给出了 $\pi(x) > \operatorname{Li}(x)$ 第一次发生的 RH 上界。Miller 素性测试成为确定性算法。整个数论的无数结果从"条件性的"转变为"无条件的"定理。
+> **本章要点**：如果 RH 成立，素数分布的误差项达到最优 $O(\sqrt{x}\ln x)$。Möbius 求和为 $O(x^{1/2+\varepsilon})$。Skewes 数给出了 $\pi(x) > \mathrm{Li}(x)$ 第一次发生的 RH 上界。Miller 素性测试成为确定性算法。整个数论的无数结果从"条件性的"转变为"无条件的"定理。
 
 > **参见**：[第二十五章：尝试的证明与进路](./chapter-25-attempts.md) ★★★

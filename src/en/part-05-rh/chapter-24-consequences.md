@@ -21,7 +21,7 @@ If RH were proved tomorrow — or disproved — a vast landscape of mathematical
 The most important consequence of RH is the optimal estimate for primes:
 
 $$
-\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)
+\pi(x) = \mathrm{Li}(x) + O(\sqrt{x} \ln x)
 $$
 
 The prime distribution becomes extraordinarily uniform — any local "clumping" or "sparseness" is governed by a square-root law. Corollaries:
@@ -30,9 +30,9 @@ The prime distribution becomes extraordinarily uniform — any local "clumping" 
 
 ## The Skewes Number
 
-In 1955, Stanley Skewes proved: *assuming RH*, there exists a number $S$ such that $\pi(S) > \operatorname{Li}(S)$ — the first time the prime counting function overtakes the logarithmic integral. Under RH: $S < e^{e^{e^{79}}} \approx 10^{10^{10^{34}}}$ — the "Skewes number."
+In 1955, Stanley Skewes proved: *assuming RH*, there exists a number $S$ such that $\pi(S) > \mathrm{Li}(S)$ — the first time the prime counting function overtakes the logarithmic integral. Under RH: $S < e^{e^{e^{79}}} \approx 10^{10^{10^{34}}}$ — the "Skewes number."
 
-The sheer size of this number is telling: although $\operatorname{Li}(x)$ overestimates $\pi(x)$ for all computationally accessible $x$, the model predicts infinitely many crossings — but so slowly that no human being will ever witness one.
+The sheer size of this number is telling: although $\mathrm{Li}(x)$ overestimates $\pi(x)$ for all computationally accessible $x$, the model predicts infinitely many crossings — but so slowly that no human being will ever witness one.
 
 ## Möbius Sums and Squarefrees
 
@@ -49,7 +49,7 @@ This directly controls the error in the natural density of squarefree integers: 
 The Generalized Riemann Hypothesis (GRH, Chapter 30) would imply uniform prime distribution across every arithmetic progression $a \bmod q$ (where $\gcd(a,q)=1$). Specifically, GRH yields a strengthened Dirichlet theorem:
 
 $$
-\pi(x; q, a) = \frac{\operatorname{Li}(x)}{\varphi(q)} + O(\sqrt{x} \ln(qx))
+\pi(x; q, a) = \frac{\mathrm{Li}(x)}{\varphi(q)} + O(\sqrt{x} \ln(qx))
 $$
 
 Primes would be **perfectly equitably distributed** among valid residue classes, to within square-root fluctuations.
@@ -69,6 +69,6 @@ Thirteen trillion zeros, all on the critical line — mathematical intuition and
 
 ---
 
-> **Key points**: RH implies the sharpest possible error term $O(\sqrt{x}\ln x)$ for $\pi(x)$. Möbius sums are bounded by $O(x^{1/2+\varepsilon})$. The Skewes number gives an RH-conditional upper bound for the first $\pi(x) > \operatorname{Li}(x)$. Miller's primality test becomes deterministic. Countless number-theoretic results transition from "conditional" to "unconditional" upon proof of RH.
+> **Key points**: RH implies the sharpest possible error term $O(\sqrt{x}\ln x)$ for $\pi(x)$. Möbius sums are bounded by $O(x^{1/2+\varepsilon})$. The Skewes number gives an RH-conditional upper bound for the first $\pi(x) > \mathrm{Li}(x)$. Miller's primality test becomes deterministic. Countless number-theoretic results transition from "conditional" to "unconditional" upon proof of RH.
 
 > **See also**: [Chapter 25: Attempted Proofs and Approaches](./chapter-25-attempts.md) ★★★

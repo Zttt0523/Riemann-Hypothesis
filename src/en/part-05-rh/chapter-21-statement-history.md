@@ -16,7 +16,7 @@ en-status = "complete"
 
 > **Riemann Hypothesis (RH)**: All non-trivial zeros of the Riemann zeta function have real part equal to $\frac{1}{2}$.
 
-Equivalently: if $\zeta(\rho) = 0$ and $0 < \operatorname{Re}(\rho) < 1$, then $\operatorname{Re}(\rho) = \frac{1}{2}$.
+Equivalently: if $\zeta(\rho) = 0$ and $0 < \Re(\rho) < 1$, then $\Re(\rho) = \frac{1}{2}$.
 
 This is the most famous — and most important — unsolved problem in mathematics. It is simple enough to state in a single line, profound enough to have resisted the efforts of the finest mathematical minds for over a century and a half.
 
@@ -27,7 +27,7 @@ Riemann first made the conjecture on the sixth page of his 1859 paper. His actua
 > *"One finds in fact about this many real roots within these bounds, and it is very probable that all roots are real. One would certainly wish for a rigorous proof of this; I have, however, temporarily set aside the search for such a proof after several fleeting unsuccessful attempts, as it appears unnecessary for the immediate objective of my investigation."*
 
 Several points deserve notice:
-1. **"All roots are real"**: Riemann was speaking of the $\xi$-function. For $\xi$, "real" means the zero lies on $\operatorname{Re}(s) = 1/2$. Hence "all roots are real" is precisely equivalent to the modern statement of RH.
+1. **"All roots are real"**: Riemann was speaking of the $\xi$-function. For $\xi$, "real" means the zero lies on $\Re(s) = 1/2$. Hence "all roots are real" is precisely equivalent to the modern statement of RH.
 2. **"Several fleeting unsuccessful attempts"**: Riemann himself tried and failed to prove his own conjecture. In the 160+ years since, no one else has succeeded either.
 3. **"Unnecessary for the immediate objective"**: Riemann's main purpose was to derive the explicit formula for $\pi(x)$ — a more practical goal — and the Hypothesis, though it would yield stronger results, was not essential for getting started.
 
@@ -40,7 +40,7 @@ The RH can be recast in dramatically different languages.
 RH is equivalent to the optimal error bound in the Prime Number Theorem:
 
 $$
-\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)
+\pi(x) = \mathrm{Li}(x) + O(\sqrt{x} \ln x)
 $$
 
 ### Mertens Function Equivalence
@@ -88,6 +88,6 @@ The difficulty lies in the gap RH occupies: it is a statement about a specific p
 
 ---
 
-> **Key points**: The Riemann Hypothesis asserts $\operatorname{Re}(\rho) = 1/2$ for all non-trivial zeros of $\zeta(s)$. Riemann proposed it in 1859 with only "fleeting unsuccessful attempts" at proof. Hilbert elevated it to Problem #8 in 1900; the Clay Institute made it a Millennium Prize Problem in 2000. RH is equivalent to the Prime Number Theorem having optimal error $O(\sqrt{x}\ln x)$. Multiple equivalent formulations — prime distribution, Mertens function, Robin's inequality — attest to RH's centrality.
+> **Key points**: The Riemann Hypothesis asserts $\Re(\rho) = 1/2$ for all non-trivial zeros of $\zeta(s)$. Riemann proposed it in 1859 with only "fleeting unsuccessful attempts" at proof. Hilbert elevated it to Problem #8 in 1900; the Clay Institute made it a Millennium Prize Problem in 2000. RH is equivalent to the Prime Number Theorem having optimal error $O(\sqrt{x}\ln x)$. Multiple equivalent formulations — prime distribution, Mertens function, Robin's inequality — attest to RH's centrality.
 
 > **See also**: [Chapter 22: Equivalent Formulations](./chapter-22-equivalents.md) ★★★

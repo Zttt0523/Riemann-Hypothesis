@@ -20,12 +20,12 @@ One of the RH's great fascinations is that it can be equivalently restated in th
 
 The most fundamental equivalence (Chapter 21):
 
-**RH** $\iff$ $\pi(x) = \operatorname{Li}(x) + O(\sqrt{x} \ln x)$
+**RH** $\iff$ $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x} \ln x)$
 
 More precisely, RH is equivalent to the statement that for every $\varepsilon > 0$:
 
 $$
-|\pi(x) - \operatorname{Li}(x)| < \frac{1}{8\pi} \sqrt{x} \ln x \quad \text{for all } x \geq 2657
+|\pi(x) - \mathrm{Li}(x)| < \frac{1}{8\pi} \sqrt{x} \ln x \quad \text{for all } x \geq 2657
 $$
 
 ## Mertens Function Equivalence
@@ -70,7 +70,7 @@ Weil's formula reveals: **RH is equivalent to the non-negativity of a certain po
 
 | Domain | Equivalence | Keywords |
 |--------|-------------|----------|
-| Prime distribution | Optimal error bound | $\pi(x) - \operatorname{Li}(x)$ |
+| Prime distribution | Optimal error bound | $\pi(x) - \mathrm{Li}(x)$ |
 | Möbius function | Growth of $M(x)$ | $O(x^{1/2+\varepsilon})$ |
 | Functional analysis | Hilbert–Pólya | Self-adjoint operator |
 | Algebraic number theory | Generalized RH | L-functions |

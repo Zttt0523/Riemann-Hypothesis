@@ -36,7 +36,7 @@ The Riemann Hypothesis has driven the development of analytic number theory for 
 
 - **1896**: Hadamard and de la Vallée Poussin independently proved the Prime Number Theorem — the first rigorous confirmation of a key consequence of Riemann's 1859 paper. This was the first major vindication of Riemann's ideas.
 
-- **1914**: G. H. Hardy proved that infinitely many zeros of $\zeta(s)$ lie *on* the critical line $\operatorname{Re}(s) = 1/2$. While still far from proving that *all* zeros lie there, this was the first substantial step toward the Riemann Hypothesis.
+- **1914**: G. H. Hardy proved that infinitely many zeros of $\zeta(s)$ lie *on* the critical line $\Re(s) = 1/2$. While still far from proving that *all* zeros lie there, this was the first substantial step toward the Riemann Hypothesis.
 
 - **1942**: Atle Selberg proved that a positive proportion of the zeros of $\zeta(s)$ lie on the critical line. This proportion has been progressively improved: Norman Levinson reached $1/3$ in 1974; Brian Conrey reached $2/5$ in 1989.
 
@@ -77,7 +77,7 @@ The Riemann Hypothesis has escaped the pages of professional journals to become 
 
 Riemann has been dead for over a century and a half, and the conjecture he set down on the sixth page of an eight-page paper remains the most important — and most tantalizing — unsolved problem in mathematics.
 
-What gives the Riemann Hypothesis its peculiar hold on the mathematical imagination? It is this: the statement itself is almost naively simple — a condition on the real part of a complex number — yet every path toward a proof leads the investigator into the deepest structures of mathematics. Automorphic forms, L-functions, random matrix theory, quantum chaos — it is as if the entire mathematical universe orbits around the critical line $\operatorname{Re}(s) = 1/2$.
+What gives the Riemann Hypothesis its peculiar hold on the mathematical imagination? It is this: the statement itself is almost naively simple — a condition on the real part of a complex number — yet every path toward a proof leads the investigator into the deepest structures of mathematics. Automorphic forms, L-functions, random matrix theory, quantum chaos — it is as if the entire mathematical universe orbits around the critical line $\Re(s) = 1/2$.
 
 Riemann closed his 1859 paper with these words:
 

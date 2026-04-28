@@ -32,7 +32,7 @@ For **positive odd integers**, the situation is profoundly different. $\zeta(3)$
 
 ## $\zeta(s)$ on the Critical Line
 
-The central stage for the Riemann Hypothesis is the critical line $\operatorname{Re}(s) = 1/2$. Along this line, $\zeta(1/2 + it)$ is a complex-valued function of the real variable $t$.
+The central stage for the Riemann Hypothesis is the critical line $\Re(s) = 1/2$. Along this line, $\zeta(1/2 + it)$ is a complex-valued function of the real variable $t$.
 
 Define the **Hardy $Z$-function**:
 
@@ -62,7 +62,7 @@ Siegel published the complete derivation in 1932. H. M. Edwards, in his classic 
 
 ## Numerical Verification
 
-Since Riemann's day, digital computers have calculated astronomical numbers of $\zeta$ zeros — and every one has lain on the critical line. As of the 2020s, over $10^{13}$ zeros have been verified to satisfy $\operatorname{Re}(s) = 1/2$. The only "off-critical-line" zeros would represent computer errors, and **no counterexample has ever been found**.
+Since Riemann's day, digital computers have calculated astronomical numbers of $\zeta$ zeros — and every one has lain on the critical line. As of the 2020s, over $10^{13}$ zeros have been verified to satisfy $\Re(s) = 1/2$. The only "off-critical-line" zeros would represent computer errors, and **no counterexample has ever been found**.
 
 This overwhelming numerical evidence is among the most compelling arguments for the truth of the Riemann Hypothesis — but it is not a proof. The history of mathematics offers cautionary examples: a conjecture may hold for $10^{10}$ instances yet ultimately be false.
 

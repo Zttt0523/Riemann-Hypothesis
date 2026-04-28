@@ -17,16 +17,16 @@ en-status = "complete"
 The Riemann zeta function is defined initially as a Dirichlet series (Chapter 14):
 
 $$
-\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} \qquad (\operatorname{Re}(s) > 1)
+\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} \qquad (\Re(s) > 1)
 $$
 
 When $s$ is a real number $> 1$, this is the familiar $p$-series (Chapter 6). When $s$ is complex — Riemann's first key insight in 1859 — $n^{-s} = e^{-s\ln n}$, and $\zeta(s)$ becomes a function of a complex variable.
 
 ## Convergence
 
-The series defining $\zeta(s)$ converges absolutely on the half-plane $\operatorname{Re}(s) > 1$. When $\operatorname{Re}(s) \leq 1$, the series diverges.
+The series defining $\zeta(s)$ converges absolutely on the half-plane $\Re(s) > 1$. When $\Re(s) \leq 1$, the series diverges.
 
-Absolute convergence means we may rearrange terms without changing the sum — but more importantly, it implies $\zeta(s)$ is **holomorphic** (Chapter 10) on $\operatorname{Re}(s) > 1$. We may differentiate term by term:
+Absolute convergence means we may rearrange terms without changing the sum — but more importantly, it implies $\zeta(s)$ is **holomorphic** (Chapter 10) on $\Re(s) > 1$. We may differentiate term by term:
 
 $$
 \zeta'(s) = -\sum_{n=1}^{\infty} \frac{\ln n}{n^s}, \quad
@@ -35,7 +35,7 @@ $$
 
 ## The Euler Product
 
-On $\operatorname{Re}(s) > 1$, $\zeta(s)$ possesses the Euler product representation (Chapter 11):
+On $\Re(s) > 1$, $\zeta(s)$ possesses the Euler product representation (Chapter 11):
 
 $$
 \zeta(s) = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}}
@@ -47,7 +47,7 @@ $$
 \ln \zeta(s) = \sum_{p} \sum_{k=1}^{\infty} \frac{1}{k \, p^{ks}}
 $$
 
-This is the bridge between addition (integers) and multiplication (primes). The product form is valid only on $\operatorname{Re}(s) > 1$ — cross that line, enter the critical strip, and $\zeta(s)$'s behavior is governed by the global properties of its analytic continuation.
+This is the bridge between addition (integers) and multiplication (primes). The product form is valid only on $\Re(s) > 1$ — cross that line, enter the critical strip, and $\zeta(s)$'s behavior is governed by the global properties of its analytic continuation.
 
 ## Values of $\zeta(s)$ on the Real Axis
 
@@ -90,7 +90,7 @@ where $\gamma \approx 0.5772$ is the Euler-Mascheroni constant.
 $\zeta(s)$ has multiple integral representations linking it to the Gamma function (Chapter 9):
 
 $$
-\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1} \, dx \qquad (\operatorname{Re}(s) > 1)
+\zeta(s) = \frac{1}{\Gamma(s)} \int_0^{\infty} \frac{x^{s-1}}{e^x - 1} \, dx \qquad (\Re(s) > 1)
 $$
 
 This follows from the geometric series $\frac{1}{e^x - 1} = \sum_{n=1}^{\infty} e^{-nx}$ and termwise integration.
@@ -111,10 +111,10 @@ Recall (Chapter 13): $\Lambda(n)$ is the von Mangoldt function — $\ln p$ when 
 
 On the real axis $s > 1$, $\zeta(s)$ is a smooth, monotonically decreasing function, starting from the pole at $s = 1$ and asymptotically approaching $1$ (since $\zeta(s) \to 1$ as $s \to \infty$).
 
-But extending our gaze into the complex plane, $\zeta(s)$ reveals behavior of extraordinary richness and complexity. Chapter 17 takes up the task of extending this function — defined so far only by a series on $\operatorname{Re}(s) > 1$ — to the entire complex plane: analytic continuation, perhaps the most powerful operation in all of complex analysis.
+But extending our gaze into the complex plane, $\zeta(s)$ reveals behavior of extraordinary richness and complexity. Chapter 17 takes up the task of extending this function — defined so far only by a series on $\Re(s) > 1$ — to the entire complex plane: analytic continuation, perhaps the most powerful operation in all of complex analysis.
 
 ---
 
-> **Key points**: $\zeta(s) = \sum n^{-s}$ converges absolutely on $\operatorname{Re}(s) > 1$, defining a holomorphic function there. The Euler product links addition (over integers) to multiplication (over primes). At positive even integers, $\zeta(2n)$ is expressible in closed form via Bernoulli numbers; values at odd integers remain mysterious. Integral representations connect $\zeta(s)$ to $\Gamma(s)$. The logarithmic derivative $-\zeta'/\zeta$ has coefficients $\Lambda(n)$.
+> **Key points**: $\zeta(s) = \sum n^{-s}$ converges absolutely on $\Re(s) > 1$, defining a holomorphic function there. The Euler product links addition (over integers) to multiplication (over primes). At positive even integers, $\zeta(2n)$ is expressible in closed form via Bernoulli numbers; values at odd integers remain mysterious. Integral representations connect $\zeta(s)$ to $\Gamma(s)$. The logarithmic derivative $-\zeta'/\zeta$ has coefficients $\Lambda(n)$.
 
 > **See also**: [Chapter 17: Analytic Continuation](./chapter-17-analytic-continuation.md) ★★

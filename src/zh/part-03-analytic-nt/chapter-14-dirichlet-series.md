@@ -28,7 +28,7 @@ $$
 
 与幂级数不同，Dirichlet 级数的收敛域不是圆，而是**半平面**。
 
-> **定理**：存在一个实数 $\sigma_c$（称为收敛横坐标，abscissa of convergence），使得 Dirichlet 级数在 $\operatorname{Re}(s) > \sigma_c$ 时收敛，在 $\operatorname{Re}(s) < \sigma_c$ 时发散。
+> **定理**：存在一个实数 $\sigma_c$（称为收敛横坐标，abscissa of convergence），使得 Dirichlet 级数在 $\Re(s) > \sigma_c$ 时收敛，在 $\Re(s) < \sigma_c$ 时发散。
 
 对于 $\zeta(s) = \sum n^{-s}$，$\sigma_c = 1$（因为当 $s > 1$ 时 $p$-级数收敛，当 $s \leq 1$ 时发散）。
 
@@ -36,9 +36,9 @@ $$
 
 ### 绝对收敛横坐标
 
-还有一个**绝对收敛横坐标** $\sigma_a$，使得级数在 $\operatorname{Re}(s) > \sigma_a$ 时绝对收敛。一般而言 $\sigma_c \leq \sigma_a \leq \sigma_c + 1$。
+还有一个**绝对收敛横坐标** $\sigma_a$，使得级数在 $\Re(s) > \sigma_a$ 时绝对收敛。一般而言 $\sigma_c \leq \sigma_a \leq \sigma_c + 1$。
 
-对于 $\zeta(s)$，$\sigma_c = \sigma_a = 1$。但并非总是相等——$\sum (-1)^{n-1} n^{-s}$ 在 $\operatorname{Re}(s) > 0$ 时收敛（非绝对），而在 $\operatorname{Re}(s) > 1$ 时才绝对收敛。
+对于 $\zeta(s)$，$\sigma_c = \sigma_a = 1$。但并非总是相等——$\sum (-1)^{n-1} n^{-s}$ 在 $\Re(s) > 0$ 时收敛（非绝对），而在 $\Re(s) > 1$ 时才绝对收敛。
 
 ## 乘法性质与 Euler 乘积
 
@@ -59,7 +59,7 @@ $$
 例如，$\mu$ 的 Dirichlet 级数是：
 
 $$
-\sum_{n=1}^{\infty} \frac{\mu(n)}{n^s} = \frac{1}{\zeta(s)} \qquad (\operatorname{Re}(s) > 1)
+\sum_{n=1}^{\infty} \frac{\mu(n)}{n^s} = \frac{1}{\zeta(s)} \qquad (\Re(s) > 1)
 $$
 
 这一关系从欧拉乘积即可得出。它表明 Möbius 函数通过 Dirichlet 级数与 $\zeta$ 函数直接相连——这是解析数论中最基本的对应关系之一。
@@ -72,7 +72,7 @@ $$
 \sum_{n \leq x} a_n = \frac{1}{2\pi i} \int_{c - i\infty}^{c + i\infty} F(s) \frac{x^s}{s} \, ds
 $$
 
-其中积分沿垂直线 $\operatorname{Re}(s) = c$（$c > \sigma_a$）进行。
+其中积分沿垂直线 $\Re(s) = c$（$c > \sigma_a$）进行。
 
 应用 Perron 公式的基本策略是：
 1. 从 Dirichlet 级数出发（例如 $\zeta(s)$ 或与其相关的函数）
@@ -94,7 +94,7 @@ $$
 **到此，黎曼猜想的结构框架已经可见**：
 
 $$
-\text{素数分布} \xleftrightarrow[]{\text{Perron 公式}} \text{$\zeta(s)$ 的对数导数} \xleftrightarrow[]{\text{极点由零点决定}} \text{$\zeta(s)$ 的零点} \xleftrightarrow[]{\text{黎曼猜想}} \text{$\operatorname{Re}(\rho) = 1/2$}
+\text{素数分布} \xleftrightarrow[]{\text{Perron 公式}} \text{$\zeta(s)$ 的对数导数} \xleftrightarrow[]{\text{极点由零点决定}} \text{$\zeta(s)$ 的零点} \xleftrightarrow[]{\text{黎曼猜想}} \text{$\Re(\rho) = 1/2$}
 $$
 
 ---

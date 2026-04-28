@@ -51,7 +51,7 @@ It was the only number-theoretic paper Riemann ever published. And it transforme
 Riemann began from Euler's product formula:
 
 $$
-\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}} \qquad (\operatorname{Re}(s) > 1)
+\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}} \qquad (\Re(s) > 1)
 $$
 
 He analytically continued $\zeta(s)$ to the entire complex plane (except for a simple pole at $s=1$), proved its functional equation, derived an explicit formula linking the zeros of $\zeta(s)$ to the distribution of prime numbers, computed the first several non-trivial zeros, and — on the sixth page — made the conjecture that now bears his name:

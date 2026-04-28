@@ -94,18 +94,18 @@ In 1859, Riemann submitted his paper "On the Number of Primes Less Than a Given 
 Riemann's explicit formula expresses $\pi(x)$ as a sum over the zeros of $\zeta(s)$:
 
 $$
-\pi(x) \approx \operatorname{Li}(x) - \sum_{\rho} \operatorname{Li}(x^\rho) + \cdots
+\pi(x) \approx \mathrm{Li}(x) - \sum_{\rho} \mathrm{Li}(x^\rho) + \cdots
 $$
 
 where $\rho$ runs over the **non-trivial zeros** of $\zeta(s)$. This breathtaking formula reveals that the primes and the zeros of $\zeta(s)$ are in precise correspondence. Each zero contributes an oscillatory "correction wave" to the prime distribution.
 
-The Riemann Hypothesis is precisely a claim about the location of these zeros: **all non-trivial zeros lie on the line $\operatorname{Re}(s) = 1/2$**.
+The Riemann Hypothesis is precisely a claim about the location of these zeros: **all non-trivial zeros lie on the line $\Re(s) = 1/2$**.
 
 ## 1896: The Proof of PNT
 
 Thirty years after Riemann's death, Jacques Hadamard and Charles de la Vallée Poussin independently proved the Prime Number Theorem in 1896.
 
-Their proofs used Riemann's framework but sidestepped the full Riemann Hypothesis. They proved the weaker but sufficient fact that $\zeta(s)$ has no zeros on the line $\operatorname{Re}(s) = 1$ — enough to establish $\pi(x) \sim x/\ln x$, but far from the extraordinarily precise error bound that the Riemann Hypothesis would imply.
+Their proofs used Riemann's framework but sidestepped the full Riemann Hypothesis. They proved the weaker but sufficient fact that $\zeta(s)$ has no zeros on the line $\Re(s) = 1$ — enough to establish $\pi(x) \sim x/\ln x$, but far from the extraordinarily precise error bound that the Riemann Hypothesis would imply.
 
 ## The Prime Journey: From Then to Now
 

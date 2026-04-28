@@ -30,10 +30,10 @@ The next-simplest family was introduced by Dirichlet in 1837 to prove that every
 For a Dirichlet character $\chi$ (a periodic, multiplicative function modulo $q$), define:
 
 $$
-L(s, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s} = \prod_p \frac{1}{1 - \chi(p) p^{-s}} \qquad (\operatorname{Re}(s) > 1)
+L(s, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s} = \prod_p \frac{1}{1 - \chi(p) p^{-s}} \qquad (\Re(s) > 1)
 $$
 
-The periodicity of $\chi$ means $L(s, \chi)$ carries information about primes modulo $q$. Each $L(s, \chi)$ satisfies a functional equation and has an analytic continuation. The corresponding **Generalized Riemann Hypothesis** (Chapter 30) asserts $\operatorname{Re}(\rho) = 1/2$ for all non-trivial zeros.
+The periodicity of $\chi$ means $L(s, \chi)$ carries information about primes modulo $q$. Each $L(s, \chi)$ satisfies a functional equation and has an analytic continuation. The corresponding **Generalized Riemann Hypothesis** (Chapter 30) asserts $\Re(\rho) = 1/2$ for all non-trivial zeros.
 
 ## Automorphic $L$-Functions
 
@@ -45,7 +45,7 @@ Each automorphic representation $\pi$ (appropriately normalized) has an associat
 
 Atle Selberg (1989) proposed the **Selberg class** $\mathcal{S}$ to axiomatize the concept of an $L$-function:
 
-1. **Dirichlet series**: $F(s) = \sum a_n n^{-s}$, absolutely convergent on $\operatorname{Re}(s) > 1$, $a_1 = 1$
+1. **Dirichlet series**: $F(s) = \sum a_n n^{-s}$, absolutely convergent on $\Re(s) > 1$, $a_1 = 1$
 2. **Analytic continuation**: $F(s)$ extends meromorphically to $\mathbb{C}$, at most a pole at $s=1$
 3. **Functional equation**: $\Phi(s) = \varepsilon \overline{\Phi(1-\bar{s})}$ where $\Phi(s) = Q^s \prod \Gamma(\lambda_j s + \mu_j) F(s)$ with $|\varepsilon| = 1$
 4. **Ramanujan conjecture**: $a_n = O(n^\varepsilon)$ for every $\varepsilon > 0$
@@ -57,7 +57,7 @@ $\zeta(s)$ belongs to $\mathcal{S}$. So do Dirichlet $L$-functions, Dedekind zet
 
 Selberg's axiomatization allows RH to be extended:
 
-> **GRH (Selberg class version)**: For every $F \in \mathcal{S}$, all non-trivial zeros of $F(s)$ satisfy $\operatorname{Re}(s) = 1/2$.
+> **GRH (Selberg class version)**: For every $F \in \mathcal{S}$, all non-trivial zeros of $F(s)$ satisfy $\Re(s) = 1/2$.
 
 ## The Langlands Connection
 

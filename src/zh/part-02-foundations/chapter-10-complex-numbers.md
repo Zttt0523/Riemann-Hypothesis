@@ -22,7 +22,7 @@ $$
 z = x + iy
 $$
 
-其中 $x = \operatorname{Re}(z)$（实部），$y = \operatorname{Im}(z)$（虚部）。
+其中 $x = \Re(z)$（实部），$y = \Im(z)$（虚部）。
 
 ### 复数的运算
 
