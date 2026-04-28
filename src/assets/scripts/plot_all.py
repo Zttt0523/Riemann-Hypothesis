@@ -10,10 +10,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import ScalarFormatter
+from matplotlib.colors import LinearSegmentedColormap
 
 ASSETS_DIR = Path(__file__).resolve().parent.parent
 MANIFEST = ASSETS_DIR / "manifest.sha256"
+MANIFEST_KEY = Path(__file__).name
 
 
 def compute_sha256(filepath: Path) -> str:
@@ -33,13 +34,11 @@ def sieve_primes(limit: int) -> np.ndarray:
 
 
 def li(x: np.ndarray) -> np.ndarray:
-    """Logarithmic integral Li(x), computed via scipy if available else trapezoidal."""
-    from scipy.special import exp1 as _exp1
-    # li(x) = Ei(ln x)   for x > 0, x != 1
-    # Use -exp1(-ln x + i0) trick — works for real x > 1
+    """Logarithmic integral Li(x) = Ei(log x), for x > 1."""
+    from scipy.special import expi as _expi
+
     with np.errstate(divide="ignore", invalid="ignore"):
-        out = -_exp1(-np.log(np.where(x <= 1, np.nan, x)))
-    return out
+        return _expi(np.log(np.where(x <= 1, np.nan, x)))
 
 
 def prime_count(x_vals, primes):
@@ -80,9 +79,22 @@ def riemann_explicit_formula(x: np.ndarray, n_zeros: int) -> np.ndarray:
         gamma = ZETA_ZEROS[k]
         rho = 0.5 + 1j * gamma
         term = -(x ** rho) / rho
-        total += term.real  # zeros come in conjugate pairs — the sum is real
+        total += 2.0 * term.real  # conjugate zeros make the contribution real
     total -= np.log(2 * np.pi)
     return total
+
+
+def riemann_prime_count_approx(x: np.ndarray, n_zeros: int) -> np.ndarray:
+    """A visual Riemann-von Mangoldt approximation to the prime-counting curve."""
+    from scipy.special import expi as _expi
+
+    x = np.asarray(x, dtype=np.float64)
+    log_x = np.log(x)
+    approx = li(x).astype(np.float64)
+    for gamma in ZETA_ZEROS[: min(n_zeros, len(ZETA_ZEROS))]:
+        rho = 0.5 + 1j * gamma
+        approx -= 2.0 * np.real(_expi(rho * log_x))
+    return approx
 
 
 def hardy_Z_scalar(t: float) -> float:
@@ -102,198 +114,383 @@ def compute_Z(t_vals: np.ndarray) -> np.ndarray:
     return np.array([hardy_Z_scalar(t) for t in t_vals])
 
 
-# ── Main plot function ───────────────────────────────────────────
+THEME = {
+    "bg": "#070a12",
+    "panel": "#0c1220",
+    "panel_edge": "#263246",
+    "grid": "#334155",
+    "text": "#f2f6ff",
+    "muted": "#9aa7b8",
+    "blue": "#64b5ff",
+    "cyan": "#7dd3fc",
+    "coral": "#ff6b5f",
+    "gold": "#ffd166",
+    "violet": "#c084fc",
+    "mint": "#7ee787",
+}
 
-def plot_riemann_beauty():
-    """Generate the showcase figure: primes, zeros, and the critical line."""
-    print("Computing prime data...")
-    primes = sieve_primes(50_000)
+PRIME_CMAP = LinearSegmentedColormap.from_list(
+    "prime_harmonics",
+    [THEME["blue"], THEME["violet"], THEME["coral"], THEME["gold"]],
+)
 
-    fig = plt.figure(figsize=(18, 12))
-    fig.patch.set_facecolor("#0d1117")
 
-    # ── Panel A: Prime counting function with Riemann corrections ──
-    ax1 = fig.add_axes([0.06, 0.55, 0.42, 0.40])
-    ax1.set_facecolor("#0d1117")
+def style_axis(ax, *, grid: bool = True) -> None:
+    """Apply the shared dark mathematical-plate style."""
+    ax.set_facecolor(THEME["panel"])
+    ax.tick_params(colors=THEME["muted"], labelsize=9)
+    ax.xaxis.label.set_color(THEME["muted"])
+    ax.yaxis.label.set_color(THEME["muted"])
+    ax.title.set_color(THEME["text"])
+    for spine in ax.spines.values():
+        spine.set_color(THEME["panel_edge"])
+        spine.set_linewidth(0.8)
+    if grid:
+        ax.grid(True, color=THEME["grid"], alpha=0.22, linewidth=0.6)
+    ax.set_axisbelow(True)
 
-    x_fine = np.logspace(2, 4.7, 2000)
-    pi_vals = np.array([prime_count(np.array([x]), primes)[0] for x in x_fine])
-    ax1.plot(x_fine, pi_vals, color="#58a6ff", lw=2.2, alpha=0.95, label=r"$\pi(x)$")
 
-    li_vals = li(x_fine)
-    ax1.plot(x_fine, li_vals, color="#f0883e", lw=1.8, ls="--", label=r"$\operatorname{Li}(x)$")
+def glow_line(ax, x, y, *, color: str, lw: float = 1.6, alpha: float = 0.95, label=None):
+    """Draw a crisp line with a restrained glow underneath."""
+    for width, glow_alpha in ((7.5, 0.055), (4.2, 0.08)):
+        ax.plot(x, y, color=color, lw=width, alpha=glow_alpha, solid_capstyle="round")
+    return ax.plot(x, y, color=color, lw=lw, alpha=alpha, label=label, solid_capstyle="round")
 
-    colors = ["#d2a8ff", "#a5d6ff", "#79c0ff", "#56d364"]
-    for idx, nz in enumerate([5, 20, 50, 100]):
-        approx = riemann_explicit_formula(x_fine, nz)
-        approx_pi = approx / np.log(x_fine) if np.all(x_fine > 1) else approx
-        approx_pi = approx / np.log(x_fine)
-        ax1.plot(x_fine, approx_pi, color=colors[idx], lw=1.0, alpha=0.8,
-                 label=f"RH explicit ({nz} zeros)")
 
-    ax1.set_xscale("log")
-    ax1.legend(loc="upper left", fontsize=9, framealpha=0.3,
-               facecolor="#161b22", edgecolor="#30363d", labelcolor="#c9d1d9")
-    ax1.set_title("A. The Prime Counting Function  π(x)  and Riemannʼs Explicit Formula",
-                  color="#e6edf3", fontsize=13, fontweight="bold", pad=12)
-    ax1.tick_params(colors="#8b949e")
-    ax1.grid(True, alpha=0.12, color="#8b949e")
-    for spine in ax1.spines.values():
-        spine.set_color("#30363d")
-
-    # ── Panel B: Hardy Z-function — the music of the zeros ──
-    ax2 = fig.add_axes([0.55, 0.55, 0.42, 0.40])
-    ax2.set_facecolor("#0d1117")
-
-    t_vals = np.linspace(1, 220, 4000)
-    Z_vals = compute_Z(t_vals)
-
-    ax2.plot(t_vals, Z_vals, color="#58a6ff", lw=1.0, alpha=0.85)
-    ax2.fill_between(t_vals, 0, Z_vals, color="#58a6ff", alpha=0.06)
-
-    # Mark known zeros on the x-axis
-    zero_mask = ZETA_ZEROS <= 220
-    ax2.scatter(ZETA_ZEROS[zero_mask], np.zeros(sum(zero_mask)),
-                color="#f85149", s=12, zorder=5, marker="o", facecolors="none", lw=1.2)
-
-    ax2.axhline(0, color="#30363d", lw=1.0, alpha=0.5)
-    ax2.set_title("B. The Hardy  Z(t)  Function — Zeros as Sign Changes on the Critical Line",
-                  color="#e6edf3", fontsize=13, fontweight="bold", pad=12)
-    ax2.set_xlabel(r"$t$", color="#8b949e", fontsize=11)
-    ax2.tick_params(colors="#8b949e")
-    ax2.grid(True, alpha=0.12, color="#8b949e")
-    for spine in ax2.spines.values():
-        spine.set_color("#30363d")
-
-    # ── Panel C: Prime spiral (Sacks spiral variant) ──
-    ax3 = fig.add_axes([0.06, 0.06, 0.28, 0.38])
-    ax3.set_facecolor("#0d1117")
-    ax3.set_aspect("equal")
-
-    n_max = 12_000
-    primes_arr = sieve_primes(n_max)
-    prime_set = set(primes_arr.tolist())
-    theta_vals = np.sqrt(np.arange(1, n_max + 1)) * 2 * np.pi
-    r = np.sqrt(np.arange(1, n_max + 1))
-    xs_all = r * np.cos(theta_vals)
-    ys_all = r * np.sin(theta_vals)
-
-    ax3.scatter(xs_all[::6], ys_all[::6], s=0.15, color="#30363d", alpha=0.6, rasterized=True)
-    for p in primes_arr:
-        ax3.scatter(xs_all[p - 1], ys_all[p - 1], s=2.0, color="#f85149", alpha=0.9, rasterized=True)
-
-    ax3.set_title("C. Prime Spiral\n(Sacks / Ulam variant)",
-                  color="#e6edf3", fontsize=12, fontweight="bold", pad=10)
-    ax3.tick_params(colors="#8b949e")
-    for spine in ax3.spines.values():
-        spine.set_color("#30363d")
-
-    # ── Panel D: Pair correlation of ζ zeros (Montgomery–Dyson) ──
-    ax4 = fig.add_axes([0.38, 0.06, 0.28, 0.38])
-    ax4.set_facecolor("#0d1117")
-
-    alpha = np.linspace(1e-10, 3.5, 500)
-    sinc = np.sin(np.pi * alpha) / (np.pi * alpha)
-    r2_gue = 1.0 - sinc ** 2
-
-    # Use known zeros to compute empirical pair correlation
-    gammas = ZETA_ZEROS[:95]  # first 95 zeros
-    # Normalize by average density
-    N = len(gammas)
-    avg_spacing = (gammas[-1] - gammas[0]) / N
-    diffs = np.diff(gammas) / avg_spacing
-
-    ax4.hist(diffs, bins=60, density=True, color="#58a6ff", alpha=0.55,
-             edgecolor="#58a6ff", linewidth=0.3, label="ζ zeros (empirical, 95 zeros)")
-
-    ax4.plot(alpha, r2_gue, color="#f0883e", lw=2.0, label="GUE prediction  $R_2(\\alpha)$")
-
-    ax4.set_xlim(0, 3.5)
-    ax4.set_ylim(0, 1.25)
-    ax4.legend(loc="upper right", fontsize=8.5, framealpha=0.3,
-               facecolor="#161b22", edgecolor="#30363d", labelcolor="#c9d1d9")
-    ax4.set_title("D. Montgomery Pair Correlation\nζ zeros match GUE Random Matrix",
-                  color="#e6edf3", fontsize=12, fontweight="bold", pad=10)
-    ax4.set_xlabel("Normalized spacing  α", color="#8b949e", fontsize=10)
-    ax4.tick_params(colors="#8b949e")
-    ax4.grid(True, alpha=0.12, color="#8b949e")
-    for spine in ax4.spines.values():
-        spine.set_color("#30363d")
-
-    # ── Panel E: The critical line — zeros and symmetry ──
-    ax5 = fig.add_axes([0.70, 0.06, 0.27, 0.38])
-    ax5.set_facecolor("#0d1117")
-
-    t_mesh = np.linspace(-2.5, 2.5, 400)
-    s_mesh = np.linspace(-2.5, 2.5, 400)
-    T, S = np.meshgrid(t_mesh, s_mesh)
-    R = T + 1j * S
-
-    # Approximate log|zeta| via first few terms of Dirichlet series (rough but suggestive)
-    approx_val = np.zeros_like(R, dtype=np.float64)
-    s0 = 0.5 + 1j * T  # evaluate on vertical strip
-
-    for n in range(1, 30):
-        approx_val += (1.0 / (n ** 0.5)) * np.cos(S * np.log(n)) / np.sqrt(
-            (T - 0.5)**2 + (S)**2 + 1e-6
+def annotate_panel(ax, label: str, title: str, subtitle: str | None = None) -> None:
+    """Place compact panel title text inside the axis to avoid layout collisions."""
+    text_box = {"facecolor": THEME["panel"], "edgecolor": "none", "alpha": 0.82, "pad": 2.0}
+    ax.text(
+        0.018,
+        0.985,
+        label,
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        color=THEME["gold"],
+        fontsize=9,
+        fontweight="bold",
+        bbox=text_box,
+        zorder=20,
+    )
+    ax.text(
+        0.075,
+        0.985,
+        title,
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        color=THEME["text"],
+        fontsize=11,
+        fontweight="bold",
+        bbox=text_box,
+        zorder=20,
+    )
+    if subtitle:
+        ax.text(
+            0.075,
+            0.928,
+            subtitle,
+            transform=ax.transAxes,
+            ha="left",
+            va="top",
+            color=THEME["muted"],
+            fontsize=8.2,
+            bbox=text_box,
+            zorder=20,
         )
 
-    # Simpler: draw the landscape conceptually
-    # Show zeros as bright points on the critical line
-    ax5.fill_between([-2.5, 2.5], -2.5, 2.5, color="#0d1117")
-    ax5.axhline(0, color="#30363d", lw=0.8)
-    ax5.axvline(0.5, color="#f0883e", lw=2.0, ls="--", alpha=0.7,
-                label=r"Critical line  $\operatorname{Re}(s)=\frac{1}{2}$")
 
-    # Plot first 30 zeros on the critical line
-    for k in range(min(30, len(ZETA_ZEROS))):
-        gamma = ZETA_ZEROS[k] / 8.0  # scale down for display
-        if gamma > 2.5:
-            break
-        ax5.scatter(0.5, gamma, color="#f85149", s=25, zorder=5, marker="o",
-                    facecolors="none", lw=1.5)
-        ax5.scatter(0.5, -gamma, color="#f85149", s=25, zorder=5, marker="o",
-                    facecolors="none", lw=1.5)
+def normalized_zero_spacings(gammas: np.ndarray) -> np.ndarray:
+    """Nearest-neighbor zero spacings normalized to mean 1."""
+    spacings = np.diff(np.asarray(gammas, dtype=float))
+    return spacings / spacings.mean()
 
-    # Mark trivial zeros on negative real axis
-    trivial_positions = [-2, -4]
-    for tx in trivial_positions:
-        ax5.scatter(tx, 0, color="#8b949e", s=20, marker="x", alpha=0.6)
 
-    ax5.set_xlim(-2.5, 2.5)
-    ax5.set_ylim(-2.5, 2.5)
-    ax5.legend(loc="upper left", fontsize=8, framealpha=0.3,
-               facecolor="#161b22", edgecolor="#30363d", labelcolor="#c9d1d9")
-    ax5.set_title("E. The Zeros of  ζ(s)\nTrivial & Non-Trivial",
-                  color="#e6edf3", fontsize=12, fontweight="bold", pad=10)
-    ax5.set_xlabel("Re(s)", color="#8b949e", fontsize=10)
-    ax5.set_ylabel("Im(s)  (scaled ×1/8)", color="#8b949e", fontsize=10)
-    ax5.tick_params(colors="#8b949e")
-    for spine in ax5.spines.values():
-        spine.set_color("#30363d")
+def gue_nearest_neighbor_density(spacing: np.ndarray) -> np.ndarray:
+    """GUE Wigner-Dyson nearest-neighbor spacing density."""
+    s = np.asarray(spacing, dtype=float)
+    return (32.0 / np.pi**2) * s**2 * np.exp((-4.0 / np.pi) * s**2)
 
-    # ── Global title ──
-    fig.suptitle(
-        "The Riemann Hypothesis  —  Primes, Zeros, and the Critical Line",
-        color="#e6edf3", fontsize=18, fontweight="bold", y=0.98,
+
+def prime_spiral_points(limit: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Sacks-style prime spiral coordinates for all integers and primes."""
+    numbers = np.arange(1, limit + 1)
+    theta = np.sqrt(numbers) * 2.0 * np.pi
+    radius = np.sqrt(numbers)
+    x_all = radius * np.cos(theta)
+    y_all = radius * np.sin(theta)
+    primes = sieve_primes(limit)
+    prime_idx = primes - 1
+    return x_all, y_all, x_all[prime_idx], y_all[prime_idx], primes
+
+
+# ── Main plot function ───────────────────────────────────────────
+
+def plot_riemann_beauty(out_path: Path | None = None, dpi: int = 220) -> Path:
+    """Generate the showcase figure: primes, zeros, and the critical line."""
+    print("Computing prime data...")
+    prime_limit = 110_000
+    primes = sieve_primes(prime_limit)
+
+    fig = plt.figure(figsize=(20, 13.5), facecolor=THEME["bg"])
+    gs = fig.add_gridspec(
+        2,
+        6,
+        left=0.055,
+        right=0.97,
+        bottom=0.075,
+        top=0.835,
+        wspace=0.34,
+        hspace=0.43,
+        height_ratios=[1.05, 0.95],
     )
 
-    # Subtitle
-    fig.text(0.5, 0.935,
-             "Panel A–B: The explicit formula links primes to ζ zeros.  Panel C: Primes naturally form spiral patterns.  "
-             "Panel D: Zero spacings follow GUE random matrix statistics (Montgomery–Dyson).  Panel E: All non‑trivial zeros lie on Re(s)=1/2.",
-             ha="center", va="top", color="#8b949e", fontsize=9.5)
+    ax1 = fig.add_subplot(gs[0, 0:3])
+    ax2 = fig.add_subplot(gs[0, 3:6])
+    ax3 = fig.add_subplot(gs[1, 0:2])
+    ax4 = fig.add_subplot(gs[1, 2:4])
+    ax5 = fig.add_subplot(gs[1, 4:6])
+    for ax in (ax1, ax2, ax3, ax4, ax5):
+        style_axis(ax)
 
-    # Footer
-    fig.text(0.5, 0.005, "Riemann Hypothesis Encyclopedia  ·  https://github.com/<org>/riemann-hypothesis",
-             ha="center", va="bottom", color="#484f58", fontsize=8, fontstyle="italic")
+    # ── Panel A: Prime counting and the explicit formula ──
+    x_fine = np.logspace(2, 5, 1_800)
+    pi_vals = prime_count(x_fine, primes)
+    li_vals = li(x_fine)
 
-    out_path = ASSETS_DIR / "images" / "plots" / "riemann-beauty.png"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_path, dpi=200, bbox_inches="tight", facecolor=fig.get_facecolor())
+    glow_line(ax1, x_fine, pi_vals, color=THEME["blue"], lw=2.2, label=r"$\pi(x)$")
+    ax1.plot(
+        x_fine,
+        li_vals,
+        color=THEME["gold"],
+        lw=1.7,
+        ls=(0, (5, 3)),
+        alpha=0.9,
+        label=r"$\operatorname{Li}(x)$",
+    )
+
+    correction_colors = [THEME["violet"], THEME["cyan"], THEME["mint"]]
+    for color, nz in zip(correction_colors, [8, 32, 96], strict=True):
+        approx_pi = riemann_prime_count_approx(x_fine, nz)
+        ax1.plot(x_fine, approx_pi, color=color, lw=1.05, alpha=0.7, label=f"{nz} zero echoes")
+
+    ax1.set_xscale("log")
+    ax1.set_xlim(x_fine[0], x_fine[-1])
+    ax1.set_ylim(0, pi_vals[-1] * 1.08)
+    ax1.set_xlabel(r"$x$")
+    ax1.set_ylabel(r"count")
+    annotate_panel(
+        ax1,
+        "A",
+        "Primes Answer a Wave",
+        r"$\pi(x)$ is pulled toward order by the first non-trivial zeros.",
+    )
+    ax1.legend(
+        loc="upper left",
+        bbox_to_anchor=(0.02, 0.84),
+        fontsize=8.5,
+        framealpha=0.28,
+        facecolor=THEME["panel"],
+        edgecolor=THEME["panel_edge"],
+        labelcolor=THEME["text"],
+    )
+
+    residual_ax = ax1.inset_axes([0.55, 0.16, 0.40, 0.28])
+    style_axis(residual_ax)
+    residual_ax.set_facecolor("#080d18")
+    residual = pi_vals - li_vals
+    approx_residual = riemann_prime_count_approx(x_fine, 96) - li_vals
+    residual_ax.plot(x_fine, residual, color=THEME["coral"], lw=0.9, alpha=0.95)
+    residual_ax.plot(x_fine, approx_residual, color=THEME["mint"], lw=0.9, alpha=0.75)
+    residual_ax.axhline(0, color=THEME["grid"], lw=0.7)
+    residual_ax.set_xscale("log")
+    residual_ax.set_title(r"$\pi(x)-\operatorname{Li}(x)$", color=THEME["muted"], fontsize=7.5, pad=4)
+    residual_ax.tick_params(labelsize=6.8, pad=1)
+
+    # ── Panel B: Hardy Z-function ──
+    t_vals = np.linspace(6.5, 240, 4_800)
+    z_vals = compute_Z(t_vals)
+    glow_line(ax2, t_vals, z_vals, color=THEME["blue"], lw=1.2)
+    ax2.fill_between(t_vals, 0, z_vals, where=z_vals >= 0, color=THEME["blue"], alpha=0.08)
+    ax2.fill_between(t_vals, 0, z_vals, where=z_vals < 0, color=THEME["violet"], alpha=0.08)
+
+    zero_mask = ZETA_ZEROS <= t_vals[-1]
+    visible_zeros = ZETA_ZEROS[zero_mask]
+    ax2.vlines(visible_zeros, -0.18, 0.18, color=THEME["coral"], lw=0.8, alpha=0.5)
+    ax2.scatter(
+        visible_zeros,
+        np.zeros_like(visible_zeros),
+        s=18,
+        facecolors=THEME["panel"],
+        edgecolors=THEME["coral"],
+        linewidths=1.1,
+        zorder=5,
+    )
+    ax2.axhline(0, color=THEME["panel_edge"], lw=0.9)
+    ax2.set_xlim(t_vals[0], t_vals[-1])
+    ax2.set_xlabel(r"height $t$ on $s=\frac{1}{2}+it$")
+    ax2.set_ylabel(r"Hardy $Z(t)$")
+    annotate_panel(
+        ax2,
+        "B",
+        "The Critical-Line Music",
+        "Each coral bead marks a sign change where ζ vanishes.",
+    )
+
+    # ── Panel C: Prime spiral ──
+    ax3.set_aspect("equal")
+    x_all, y_all, x_prime, y_prime, spiral_primes = prime_spiral_points(18_000)
+    harmonic_color = np.sin(np.log(spiral_primes) * ZETA_ZEROS[0]) + np.cos(
+        np.log(spiral_primes) * ZETA_ZEROS[1] / 2.0
+    )
+    ax3.scatter(x_all[::5], y_all[::5], s=0.18, color=THEME["grid"], alpha=0.45, rasterized=True)
+    ax3.scatter(
+        x_prime,
+        y_prime,
+        c=harmonic_color,
+        cmap=PRIME_CMAP,
+        s=3.4,
+        alpha=0.92,
+        linewidths=0,
+        rasterized=True,
+    )
+    ax3.scatter([0], [0], s=28, color=THEME["gold"], alpha=0.95)
+    ax3.set_xticks([])
+    ax3.set_yticks([])
+    annotate_panel(
+        ax3,
+        "C",
+        "Prime Spiral Harmonics",
+        "Irregular primes reveal diagonal and radial resonances.",
+    )
+
+    # ── Panel D: Zero spacings and random matrix rhythm ──
+    spacings = normalized_zero_spacings(ZETA_ZEROS)
+    spacing_grid = np.linspace(0, 3.4, 600)
+    density = gue_nearest_neighbor_density(spacing_grid)
+    ax4.hist(
+        spacings,
+        bins=np.linspace(0, 3.4, 34),
+        density=True,
+        color=THEME["blue"],
+        alpha=0.48,
+        edgecolor=THEME["cyan"],
+        linewidth=0.35,
+        label="unfolded ζ zeros",
+    )
+    glow_line(
+        ax4,
+        spacing_grid,
+        density,
+        color=THEME["gold"],
+        lw=2.0,
+        label="GUE Wigner-Dyson",
+    )
+    ax4.axvline(1.0, color=THEME["coral"], lw=1.0, ls=":", alpha=0.85)
+    ax4.set_xlim(0, 3.4)
+    ax4.set_ylim(0, max(density.max(), 1.0) * 1.22)
+    ax4.set_xlabel("normalized nearest spacing")
+    ax4.set_ylabel("density")
+    annotate_panel(
+        ax4,
+        "D",
+        "Random-Matrix Rhythm",
+        "The zeros repel each other like eigenvalues.",
+    )
+    ax4.legend(
+        loc="upper right",
+        fontsize=8.2,
+        framealpha=0.28,
+        facecolor=THEME["panel"],
+        edgecolor=THEME["panel_edge"],
+        labelcolor=THEME["text"],
+    )
+
+    # ── Panel E: Critical strip and zero constellation ──
+    ax5.axvspan(0, 1, color=THEME["blue"], alpha=0.055)
+    ax5.axvline(0, color=THEME["panel_edge"], lw=0.9)
+    ax5.axvline(1, color=THEME["panel_edge"], lw=0.9)
+    ax5.axvline(0.5, color=THEME["gold"], lw=2.0, ls=(0, (6, 4)), alpha=0.9)
+    ax5.axhline(0, color=THEME["panel_edge"], lw=0.9)
+
+    positive = ZETA_ZEROS[:64]
+    scaled = np.log1p(positive) / np.log1p(positive[-1]) * 3.05
+    y_zeros = np.concatenate([-scaled[::-1], scaled])
+    x_zeros = np.full_like(y_zeros, 0.5)
+    sizes = np.linspace(13, 30, len(y_zeros))
+    ax5.scatter(x_zeros, y_zeros, s=sizes * 3.0, color=THEME["coral"], alpha=0.08, linewidths=0)
+    ax5.scatter(
+        x_zeros,
+        y_zeros,
+        s=sizes,
+        facecolors=THEME["panel"],
+        edgecolors=THEME["coral"],
+        linewidths=1.05,
+        zorder=5,
+    )
+    for tx in [-2, -4]:
+        ax5.scatter(tx, 0, s=42, marker="x", color=THEME["muted"], alpha=0.8, linewidths=1.5)
+    ax5.text(0.53, 2.95, r"$\operatorname{Re}(s)=\frac{1}{2}$", color=THEME["gold"], fontsize=9)
+    ax5.text(0.04, -3.18, "critical strip", color=THEME["muted"], fontsize=8)
+    ax5.text(-4.25, 0.20, "trivial zeros", color=THEME["muted"], fontsize=8)
+    ax5.set_xlim(-4.4, 1.45)
+    ax5.set_ylim(-3.35, 3.35)
+    ax5.set_xlabel(r"$\operatorname{Re}(s)$")
+    ax5.set_ylabel(r"compressed $\operatorname{Im}(s)$")
+    annotate_panel(
+        ax5,
+        "E",
+        "The Critical Strip Constellation",
+        "RH says every non-trivial zero lives on the golden meridian.",
+    )
+
+    # ── Global framing ──
+    fig.text(
+        0.5,
+        0.965,
+        "The Riemann Hypothesis",
+        ha="center",
+        va="top",
+        color=THEME["text"],
+        fontsize=30,
+        fontweight="bold",
+    )
+    fig.text(
+        0.5,
+        0.926,
+        "Primes become music when heard through the zeros of ζ(s)",
+        ha="center",
+        va="top",
+        color=THEME["gold"],
+        fontsize=14,
+    )
+    fig.text(
+        0.5,
+        0.895,
+        "Explicit formula  ·  Hardy Z-function  ·  Prime spirals  ·  GUE spacing  ·  Critical line",
+        ha="center",
+        va="top",
+        color=THEME["muted"],
+        fontsize=10,
+    )
+    fig.text(
+        0.5,
+        0.028,
+        "Riemann Hypothesis Encyclopedia  ·  generated from src/assets/scripts/plot_all.py",
+        ha="center",
+        va="bottom",
+        color="#596275",
+        fontsize=8,
+        fontstyle="italic",
+    )
+
+    output = out_path or ASSETS_DIR / "images" / "plots" / "riemann-beauty.png"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output, dpi=dpi, bbox_inches="tight", pad_inches=0.22, facecolor=fig.get_facecolor())
     plt.close(fig)
-    print(f"Saved → {out_path}")
-    return out_path
+    print(f"Saved → {output}")
+    return output
 
 
 # ── CLI ───────────────────────────────────────────────────────────
@@ -304,10 +501,10 @@ def generate():
     plots_dir.mkdir(parents=True, exist_ok=True)
 
     manifest = {}
-    out = plot_riemann_beauty()
-    manifest["plot_riemann_beauty.py"] = compute_sha256(Path(__file__))
+    plot_riemann_beauty()
+    manifest[MANIFEST_KEY] = compute_sha256(Path(__file__))
 
-    MANIFEST.write_text(json.dumps(manifest, indent=2))
+    MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Manifest written → {MANIFEST}")
 
 
@@ -318,8 +515,8 @@ def check():
         sys.exit(1)
     stored = json.loads(MANIFEST.read_text())
     script_hash = compute_sha256(Path(__file__))
-    if stored.get("plot_riemann_beauty.py") != script_hash:
-        print("  STALE: plot_riemann_beauty.py — re-run generate-assets")
+    if stored.get(MANIFEST_KEY) != script_hash:
+        print(f"  STALE: {MANIFEST_KEY} — re-run generate-assets")
         sys.exit(1)
     print("All assets up to date.")
     sys.exit(0)
