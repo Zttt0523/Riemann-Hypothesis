@@ -2,14 +2,91 @@
 difficulty = "★★"
 prerequisites = ["II-10", "IV-16"]
 paths = ["blue", "red"]
-keywords = ["TBD", "TBD"]
+keywords = ["analytic continuation", "contour integral", "Hankel", "Riemann", "identity principle"]
 zh-status = "complete"
 en-status = "missing"
 en-missing-note = "English translation pending"
 ---
 
-# 解析延拓
+# 第十七章：解析延拓
 
-> Difficulty: ★★ | Paths: 🟡 🔴 | Prerequisites: II-10, IV-16
+> 难度：★★ | 路径：🟡🔴 | 前置：第十章、第十六章
 
-*Content to be developed.*
+## 问题
+
+$\zeta(s)$ 的 Dirichlet 级数仅在 $\operatorname{Re}(s) > 1$ 处收敛。然而黎曼猜想涉及的零点在临界带 $0 < \operatorname{Re}(s) < 1$ 内。要讨论这些零点，我们首先需要将 $\zeta(s)$ 的定义延拓到整个复平面。
+
+**解析延拓**是复分析中最强大的工具之一。其基本思想是：如果一个全纯函数在某个区域上已定义，且该区域足够大，则在整个复平面上的延拓（如果存在）是**唯一的**。这一性质称为**恒等定理**（identity theorem）。
+
+## 恒等定理
+
+> **恒等定理**：若两个全纯函数在一个具有极限点的集合上取值相同，则它们在所有连通的全纯区域内全等。
+
+这一事实在实分析中并不成立（如第八章中的 $e^{-1/x^2}$ 例子所示），但在复分析中，全纯性是一种极强的约束。给定了 $\zeta(s)$ 在半平面 $\operatorname{Re}(s) > 1$ 上的定义，**至多存在一种方式将其全纯地扩展到更大的区域**。
+
+## Riemann 的方法：围道积分
+
+黎曼 1859 年的原始方法使用了复平面上的围道积分。考虑积分：
+
+$$
+\zeta(s) = \frac{\Gamma(1-s)}{2\pi i} \int_C \frac{(-z)^{s-1}}{e^z - 1} \, dz
+$$
+
+其中 $C$ 是 Hankel 围道——从 $+\infty$ 出发，沿正实轴上方行进，绕原点一圈，再沿正实轴下方返回 $+\infty$。
+
+这个表示的美妙之处在于：**积分对所有 $s \neq 1$ 的复数值都收敛**。被积函数中的 $\Gamma(1-s)$ 在 $s = 1, 2, 3, \ldots$ 处具有极点，但这些极点恰好被积分的零点所抵消（除了 $s = 1$）。因此，我们获得了 $\zeta(s)$ 到整个复平面（除 $s = 1$ 外）的解析延拓。
+
+## 其他延拓方法
+
+### 交错级数延拓
+
+利用 Dirichlet $\eta$ 函数（交替 $\zeta$ 函数）：
+
+$$
+\eta(s) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^s} = (1 - 2^{1-s})\,\zeta(s)
+$$
+
+$\eta(s)$ 的级数对 $\operatorname{Re}(s) > 0$ 收敛（是条件收敛而非绝对收敛）。由于因子 $(1 - 2^{1-s})$ 在 $\operatorname{Re}(s) > 0$ 内解析，我们可以解得：
+
+$$
+\zeta(s) = \frac{1}{1 - 2^{1-s}} \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^s} \qquad (\operatorname{Re}(s) > 0, \; s \neq 1)
+$$
+
+这已经是一个延拓——将定义域从 $\operatorname{Re}(s) > 1$ 扩展到 $\operatorname{Re}(s) > 0$。进一步的延拓需要更复杂的技术。
+
+### 函数方程延拓
+
+函数方程（第十八章的主题）提供了最终的延拓：它显式地将 $\zeta(s)$ 与 $\zeta(1-s)$ 联系起来。一旦 $\zeta(s)$ 在 $\operatorname{Re}(s) > 0$ 上已知，函数方程就自动将其延拓到了 $\operatorname{Re}(s) < 0$——从而覆盖了整个复平面。
+
+## 延拓后的 $\zeta(s)$：全局图景
+
+完成解析延拓后，我们对 $\zeta(s)$ 有了如下全局视野：
+
+- $s = 1$ 是一个**简单极点**，留数为 $1$——且是 $\zeta(s)$ 唯一的极点
+- 在 $s = 1$ 附近，$\zeta(s) \sim \frac{1}{s-1}$
+- 在 $\operatorname{Re}(s) > 1$ 上，$\zeta(s)$ 由原始级数和欧拉乘积给出
+- 在整个复平面的其余部分，$\zeta(s)$ 由解析延拓定义——通过围道积分、函数方程或交替级数
+
+## 平凡零点
+
+解析延拓后，我们立即发现 $\zeta(s)$ 在**负偶数**处取零值：
+
+$$
+\zeta(-2) = \zeta(-4) = \zeta(-6) = \cdots = 0
+$$
+
+这些零点直接来自函数方程中 $\Gamma$ 函数的极点。它们被称为 $\zeta(s)$ 的**平凡零点**（trivial zeros），因为它们的来源和位置完全已知且"平凡"。
+
+但 $\zeta(s)$ 还拥有无穷多个**非平凡零点**（non-trivial zeros），全部位于临界带 $0 < \operatorname{Re}(s) < 1$ 内。黎曼猜想正是关于这些零点的位置。
+
+## 为什么解析延拓至关重要？
+
+没有解析延拓，$\zeta(s)$ 就只是一个在右半平面内定义的无害级数，素数定理无法证明，黎曼猜想也无从谈起。
+
+解析延拓将 $\zeta(s)$ 的"隐藏部分"揭示出来——临界带内的非平凡零点——而这些零点恰恰携带着素数分布的精细信息。在某种意义上，$\zeta(s)$ 的级数定义 $\sum n^{-s}$ 只是它的"可见表面"；解析延拓则将其深层结构——零点、极点、增长速率——全部暴露在分析的光芒之下。
+
+---
+
+> **本章要点**：恒等定理保证了解析延拓的唯一性。黎曼通过 Hankel 围道积分首次将 $\zeta(s)$ 延拓到整个复平面（除 $s=1$ 外）。$\zeta(s)$ 的唯一极点在 $s=1$，留数为 $1$。负偶数是 $\zeta(s)$ 的平凡零点。非平凡零点全部位于临界带 $0 < \operatorname{Re}(s) < 1$ 内，是黎曼猜想的研究对象。
+
+> **参见**：[第十八章：函数方程](./chapter-18-functional-equation.md) ★★★
