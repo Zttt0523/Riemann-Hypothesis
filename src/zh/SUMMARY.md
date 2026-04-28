@@ -49,6 +49,7 @@
   - [第三十二章：哲学与文化影响](part-07-reflections/chapter-32-philosophy.md)
 
 - [附录 A：从一维到二维——素数在复数域绽放](appendix/gaussian-primes.md)
+- [附录 B：黎曼猜想为何难以证明——难点、进路与第一性原理](appendix/why-rh-is-hard.md)
 
 [参考书目](bibliography.md)
 

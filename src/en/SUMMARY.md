@@ -49,6 +49,7 @@
   - [Chapter 32: Philosophical and Cultural Impact](part-07-reflections/chapter-32-philosophy.md)
 
 - [Appendix A: From 1D to 2D — How Primes Blossom in the Complex Plane](appendix/gaussian-primes.md)
+- [Appendix B: Why RH Is Hard — Obstructions, Strategies, and First Principles](appendix/why-rh-is-hard.md)
 
 [Bibliography](bibliography.md)
 
