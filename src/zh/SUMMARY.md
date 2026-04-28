@@ -48,6 +48,8 @@
   - [第三十一章：计算验证](part-07-reflections/chapter-31-computation.md)
   - [第三十二章：哲学与文化影响](part-07-reflections/chapter-32-philosophy.md)
 
+- [附录 A：从一维到二维——素数在复数域绽放](appendix/gaussian-primes.md)
+
 [参考书目](bibliography.md)
 
 [索引](index.md)

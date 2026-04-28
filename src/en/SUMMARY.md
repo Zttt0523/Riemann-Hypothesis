@@ -48,6 +48,8 @@
   - [Chapter 31: Computational Verification](part-07-reflections/chapter-31-computation.md)
   - [Chapter 32: Philosophical and Cultural Impact](part-07-reflections/chapter-32-philosophy.md)
 
+- [Appendix A: From 1D to 2D — How Primes Blossom in the Complex Plane](appendix/gaussian-primes.md)
+
 [Bibliography](bibliography.md)
 
 [Index](index.md)
