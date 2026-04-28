@@ -2,14 +2,131 @@
 difficulty = "★★"
 prerequisites = ["II-07"]
 paths = ["blue", "red"]
-keywords = ["TBD", "TBD"]
+keywords = ["complex numbers", "holomorphic", "Cauchy-Riemann", "Euler formula", "complex plane"]
 zh-status = "complete"
 en-status = "missing"
 en-missing-note = "English translation pending"
 ---
 
-# 复数与复变函数
+# 第十章：复数与复变函数
 
-> Difficulty: ★★ | Paths: 🟡 🔴 | Prerequisites: II-07
+> 难度：★★ | 路径：🟡🔴 | 前置：第七章
 
-*Content to be developed.*
+## 复数的代数
+
+### 从实数到复数
+
+实数系完备了有理数的"漏洞"，但在代数上仍然不完备：方程 $x^2 + 1 = 0$ 在实数中没有解。引入**虚数单位** $i$，满足 $i^2 = -1$，我们得到**复数**：
+
+$$
+z = x + iy
+$$
+
+其中 $x = \operatorname{Re}(z)$（实部），$y = \operatorname{Im}(z)$（虚部）。
+
+### 复数的运算
+
+复数的加减法与实数向量类似：
+
+$$
+(a + ib) + (c + id) = (a + c) + i(b + d)
+$$
+
+乘法则利用 $i^2 = -1$：
+
+$$
+(a + ib)(c + id) = ac + iad + ibc + i^2 bd = (ac - bd) + i(ad + bc)
+$$
+
+### 复共轭与模
+
+复数 $z = x + iy$ 的**共轭**为 $\bar{z} = x - iy$。复数的**模**（绝对值）为 $|z| = \sqrt{x^2 + y^2} = \sqrt{z\bar{z}}$。模表示复数在复平面上的点到原点的距离。
+
+## 复数平面
+
+每一个复数对应复平面上的一个点 $(x, y)$。实轴是横轴，虚轴是纵轴。复数的加法对应向量加法；乘法对应**旋转加伸缩**。
+
+## 欧拉公式
+
+复分析中最优美的公式当属欧拉公式：
+
+$$
+e^{i\theta} = \cos\theta + i\sin\theta
+$$
+
+由此，任意复数可以写成**极形式**：
+
+$$
+z = r e^{i\theta} = r(\cos\theta + i\sin\theta)
+$$
+
+其中 $r = |z|$ 是模，$\theta = \arg(z)$ 是辐角。
+
+特殊情形 $\theta = \pi$ 给出了数学中最著名的恒等式：
+
+$$
+e^{i\pi} + 1 = 0
+$$
+
+将 $e$、$i$、$\pi$、$1$ 和 $0$ 联系在了一起——数学中五个最基本的常数。
+
+欧拉公式对 $\zeta$ 函数至关重要。通过 $n^{-s} = e^{-s \ln n}$，复数指数自然地出现在 $\zeta(s)$ 的每一项中。当 $s = \sigma + it$ 时：
+
+$$
+n^{-s} = n^{-\sigma - it} = n^{-\sigma} \cdot e^{-i t \ln n}
+$$
+
+虚部 $t$ 产生了一个旋转因子 $e^{-i t \ln n}$，而实部 $\sigma$ 控制模的大小。
+
+## 复变函数
+
+一个**复变函数** $f: \mathbb{C} \to \mathbb{C}$ 将一个复数映射到另一个复数。最简单的例子：
+
+- $f(z) = z^2 = (x+iy)^2 = (x^2 - y^2) + i(2xy)$
+- $f(z) = e^z = e^{x+iy} = e^x(\cos y + i\sin y)$
+
+注意 $e^z$ 是周期的！$e^{z + 2\pi i} = e^z$。指数函数在复数域上展现出了在实数域上看不到的丰富结构。
+
+## 复可微性与 Cauchy-Riemann 方程
+
+复变函数的核心概念是**复可微性**。$f(z)$ 在 $z_0$ 处复可微，如果：
+
+$$
+f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}
+$$
+
+存在，其中 $h$ 是一个**复数**。这与实可微性有本质不同：在实数中，$h$ 只能从两个方向趋近于 $0$；在复数中，$h$ 可以从**复平面上无穷多个方向**趋近于 $0$。复可微性是一个远比实可微性强的条件。
+
+将 $f(z) = u(x, y) + i v(x, y)$ 分解为实部和虚部，复可微性等价于 **Cauchy-Riemann 方程**：
+
+$$
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \qquad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+$$
+
+满足这些方程的函数称为**全纯函数**（holomorphic function）或**解析函数**（analytic function）。
+
+## 全纯函数的惊人性质
+
+一旦 $f$ 在某个区域上全纯，以下所有性质**自动成立**：
+
+1. $f$ 无穷次可微
+2. $f$ 等于其 Taylor 级数（解析性）
+3. $f$ 满足**最大模原理**：$|f|$ 的最大值出现在边界上
+4. $f$ 满足**柯西积分公式**：区域内部的值完全由边界上的值决定
+5. 若 $f$ 在整个复平面上全纯且有界，则 $f$ 必为常数（Liouville 定理）
+
+这第五条——Liouville 定理——是素数定理经典证明中的关键步骤之一。
+
+实可微函数与全纯函数之间的差距是根本性的。实可微函数可以是"病态"的——处处连续却处处不可微的函数、可微但导数不连续的函数、无穷次可微却不解析的函数——而全纯函数的世界是严格规整的，充满了"自动成立"的美妙定理。
+
+**理解全纯函数的这些性质，是理解黎曼 $\zeta$ 函数为何具有如此深刻结构的关键。**
+
+## 复分析与 $\zeta$ 函数
+
+$\zeta(s)$ 是一个复变量的函数。其最深刻的性质——**解析延拓**和**函数方程**——完全依赖于复分析的工具。下一章将讨论无穷乘积，这是连接 $\zeta$ 函数的级数定义与欧拉乘积的桥梁。Part IV 将全面展开 $\zeta$ 函数的复分析理论。
+
+---
+
+> **本章要点**：复数通过 $i^2 = -1$ 扩展了实数。欧拉公式 $e^{i\theta} = \cos\theta + i\sin\theta$ 是复分析的基石。复可微性（全纯性）远比实可微性强——一次复可微自动蕴含无穷次可微和解析性。全纯函数的这些"自动性质"是 $\zeta$ 函数理论的数学基础。
+
+> **参见**：[第十一章：无穷乘积](./chapter-11-infinite-products.md) ★★

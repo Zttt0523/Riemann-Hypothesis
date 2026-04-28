@@ -2,14 +2,93 @@
 difficulty = "★★"
 prerequisites = ["II-06"]
 paths = ["blue", "red"]
-keywords = ["TBD", "TBD"]
+keywords = ["infinite product", "Euler product", "Weierstrass factorization", "convergence"]
 zh-status = "complete"
 en-status = "missing"
 en-missing-note = "English translation pending"
 ---
 
-# 无穷乘积
+# 第十一章：无穷乘积
 
-> Difficulty: ★★ | Paths: 🟡 🔴 | Prerequisites: II-06
+> 难度：★★ | 路径：🟡🔴 | 前置：第六章
 
-*Content to be developed.*
+## 乘法中的无穷
+
+我们已经熟悉了无穷级数——无穷多个数相加。**无穷乘积**是无穷多个数相乘：
+
+$$
+P = \prod_{n=1}^{\infty} a_n = a_1 \cdot a_2 \cdot a_3 \cdot \cdots
+$$
+
+与级数类似，无穷乘积的收敛性通过**部分积**的极限来定义：
+
+$$
+P_N = \prod_{n=1}^{N} a_n, \qquad \prod_{n=1}^{\infty} a_n = \lim_{N \to \infty} P_N
+$$
+
+但有一个微妙的约定：**如果极限为 $0$，我们说无穷乘积发散于 $0$。** 这是因为我们通常希望无穷乘积具有类似"有限乘积"的代数性质（例如，乘积为零当且仅当某个因子为零），而发散于 $0$ 的乘积（如 $\prod (1 - \frac{1}{n})$）并没有这样的性质。
+
+### 收敛准则
+
+通常将因子写为 $a_n = 1 + u_n$。无穷乘积 $\prod (1 + u_n)$ 收敛（且不为零）当且仅当 $\sum |u_n|$ 收敛。这提供了一个简便的判断方法：
+
+- $\prod_{n=2}^{\infty} \left(1 - \frac{1}{n^2}\right) = \frac{1}{2}$（收敛）
+- $\prod_{n=2}^{\infty} \left(1 - \frac{1}{n}\right)$ 发散于 $0$
+
+## 欧拉乘积：$\zeta$ 函数的核心恒等式
+
+欧拉在 1737 年发现了分析学中最惊人的恒等式之一——将级数与素数乘积联系起来的**欧拉乘积**：
+
+$$
+\sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}} \qquad (\operatorname{Re}(s) > 1)
+$$
+
+左边是 $\zeta(s)$ 的级数定义——所有正整数的倒数的 $s$ 次幂之和。右边是遍历所有素数 $p = 2, 3, 5, 7, \ldots$ 的无穷乘积。这个等式将**加法（整数的和）与乘法（素数的积）**深刻地联系在了一起。
+
+### 证明思路
+
+展开 $\prod_{p} \frac{1}{1 - p^{-s}}$ 中的每个因子：
+
+$$
+\frac{1}{1 - p^{-s}} = 1 + p^{-s} + p^{-2s} + p^{-3s} + \cdots
+$$
+
+（这是公比 $r = p^{-s}$ 的几何级数）。所有素数因子的乘积展开后，根据算术基本定理（每个整数有唯一的素数分解），每一项 $n^{-s}$ 恰好出现一次。因此乘积等于 $\sum_{n=1}^{\infty} n^{-s} = \zeta(s)$。
+
+欧拉乘积是解析数论的基石。它表明素数分布的信息完全编码在 $\zeta(s)$ 的性质之中——特别是其零点的位置。
+
+## 欧拉乘积的直接推论
+
+**素数有无穷多个的解析证明**：当 $s \to 1^+$ 时，$\sum n^{-s}$ 发散（调和级数），因此 $\prod (1 - p^{-s})^{-1}$ 必须发散。如果素数只有有限多个，这个乘积将是有限的——矛盾。因此素数有无穷多个。这一论证与欧几里得的经典证明在本质上不同——它使用了分析方法（发散性），是解析数论的典范思路。
+
+## 无穷乘积的正则化
+
+有时发散乘积也可以在某种意义下赋予"值"。例如，对于 $\prod_{p} (1 - p^{-1})^{-1}$（当 $s \to 1^+$），虽然发散，其发散速度可以通过 Mertens 定理精确描述：
+
+$$
+\prod_{p \leq x} \left(1 - \frac{1}{p}\right) \sim \frac{e^{-\gamma}}{\ln x}
+$$
+
+其中 $\gamma \approx 0.5772$ 是 Euler-Mascheroni 常数。该常数本身也出现在 $\zeta(s)$ 在 $s=1$ 处极点展开中。
+
+## 一般无穷乘积：Weierstrass 分解
+
+复分析中一个深刻的定理是**Weierstrass 分解定理**：任何整函数（在整个复平面上全纯的函数）可以通过其零点表示为无穷乘积。例如，正弦函数的乘积表示：
+
+$$
+\sin(\pi z) = \pi z \prod_{n=1}^{\infty} \left(1 - \frac{z^2}{n^2}\right)
+$$
+
+比较这个乘积与 Taylor 展开 $\sin(\pi z) = \pi z - \frac{(\pi z)^3}{6} + \cdots$，欧拉得出了 $\zeta(2) = \pi^2/6$。黎曼在 $\zeta(s)$ 的函数方程推导中使用了本质上类似的技术——通过 $\Gamma$ 函数和 $\zeta$ 函数的乘积表示。
+
+## 与黎曼猜想的关系
+
+欧拉乘积只在 $\operatorname{Re}(s) > 1$ 时收敛。但通过解析延拓（第十七章），$\zeta(s)$ 被定义到了整个复平面。在临界带 $0 < \operatorname{Re}(s) < 1$ 中，$\zeta(s)$ 的行为由其零点决定——这些零点通过欧拉乘积间接地与素数分布联系在一起。
+
+这就是黎曼 1859 年论文的精髓：**通过研究 $\zeta(s)$ 在复平面上的解析性质和零点位置，获得素数分布的最精确信息。**
+
+---
+
+> **本章要点**：无穷乘积是无穷级数的乘法类比。欧拉乘积 $\zeta(s) = \prod_p (1 - p^{-s})^{-1}$ 将加法（级数）与乘法（素数）深刻地联系起来，是解析数论的基石。Weierstrass 分解定理将整函数表示为其零点的乘积。这些工具构成了进入 $\zeta$ 函数理论的最后一道预备知识。
+
+> **继续阅读**：[第三部：解析数论基础](../part-03-analytic-nt/chapter-12-prime-history.md) ★
