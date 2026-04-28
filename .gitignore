@@ -21,3 +21,4 @@ wheels/
 Thumbs.db
 
 # Asset manifest is committed for CI staleness checks
+.codex/
