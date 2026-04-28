@@ -11,6 +11,7 @@ after = ["links"]
 [preprocessor.katex.katex]
 macros = "src/macros.tex"
 no-css = false
+trust = true
 
 [output.html]
 mathjax-support = false
