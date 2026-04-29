@@ -1,3 +1,8 @@
+# Lean artifacts
+lean/**/build/
+lean/**/.lake/
+lean/**/lake-packages/
+
 # Reading materials (PDFs, papers — tracked via .gitkeep only)
 reading/**/*.pdf
 reading/**/*.djvu
